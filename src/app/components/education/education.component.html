@@ -1,0 +1,23 @@
+
+<div class="d-flex container align-items-center"> 
+   <h1>Educacion</h1>
+   <div>
+      <app-add-button></app-add-button>
+   </div>
+</div>
+<app-education-item
+ *ngFor="let educacion of listaEducacion"
+ [educationItem]="educacion"
+ (educacionABorrar)="pasoAlModal($event)"
+ >
+</app-education-item>
+
+<app-modal-delete
+    [educacionIn]="educacionBorrar"
+    (deleteEducacion)="eliminarEducacion($event)"
+>
+</app-modal-delete>
+
+
+
+
