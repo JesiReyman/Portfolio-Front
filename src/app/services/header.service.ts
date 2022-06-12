@@ -17,10 +17,10 @@ export class HeaderService {
 
   //Defino los métodos 
   public getUser():Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.apiServerUrl}/user/1`);
+    return this.http.get<Usuario>(`${this.apiServerUrl}/usuario/1`);
   }
 
   public updateUser(usuario : Usuario):Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.apiServerUrl}/user/edit`, usuario);
+    return this.http.put<Usuario>(`${this.apiServerUrl}/usuario/edit`, usuario);
   }
 }
