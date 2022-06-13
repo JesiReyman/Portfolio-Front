@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { ModalDeleteComponent } from './components/modal-delete/modal-delete.com
 import { DeleteButtonComponent } from './components/buttons/delete-button/delete-button.component';
 import { EditButtonComponent } from './components/buttons/edit-button/edit-button.component';
 import { AddButtonComponent } from './components/buttons/add-button/add-button.component';
+import { AddModalComponent } from './components/modals/add-modal/add-modal.component';
+import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
 
 
 
@@ -24,13 +26,16 @@ import { AddButtonComponent } from './components/buttons/add-button/add-button.c
     ModalDeleteComponent,
     DeleteButtonComponent,
     EditButtonComponent,
-    AddButtonComponent
+    AddButtonComponent,
+    AddModalComponent,
+    EditModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

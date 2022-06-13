@@ -13,6 +13,7 @@ export class EducationComponent implements OnInit {
   public listaEducacion: Educacion[] = [];
   educacionItem: Educacion = <Educacion>{};
   educacionBorrar: Educacion = <Educacion>{};
+  editarEstaEducacion: Educacion = <Educacion>{};
 
   constructor(private educacionService: EducationService) { }
 
@@ -44,6 +45,34 @@ export class EducationComponent implements OnInit {
         console.log(response);
         this.getListaEducacion();
       },
+      error:(error: HttpErrorResponse)=> {
+        alert(error.message);
+      }
+    })
+  }
+
+  addEducacion(educacion: Educacion){
+    console.log("a educacion llego: " + JSON.stringify(educacion));
+    this.educacionService.addEducacion(educacion).subscribe({
+      next:(response: Educacion) => {
+        this.listaEducacion.push(response);
+      },
+      error:(error: HttpErrorResponse)=>{
+        alert(error.message)
+      } 
+  });
+  }
+
+  pasoAlEditModal(item: Educacion){
+    this.editarEstaEducacion = item;
+  }
+
+  editarEducacion(educacion: Educacion){
+    this.educacionService.updateEducacion(educacion.id_Edu, educacion).subscribe({
+      next: (response: Educacion) => {
+        console.log(response);
+        this.getListaEducacion();
+      }, 
       error:(error: HttpErrorResponse)=> {
         alert(error.message);
       }

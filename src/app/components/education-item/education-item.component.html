@@ -4,7 +4,11 @@
     {{educationItem.fechaEdu}}
     {{educationItem.descripcionEdu}}
     <div class="d-flex">
-      <app-edit-button></app-edit-button>
+
+      <app-edit-button
+      (click)="editar(educationItem)"
+      ></app-edit-button>
+      
       <app-delete-button
       (click)="seleccion(educationItem)"
       ></app-delete-button>

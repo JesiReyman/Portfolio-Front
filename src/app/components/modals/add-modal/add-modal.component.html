@@ -1,0 +1,48 @@
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Agregar educación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form
+        #addForm="ngForm"
+        class="add-form" 
+        (ngSubmit)="onSubmit(addForm)"
+        >
+          <div class="mb-3">
+            <label for="titulo-educacion" class="col-form-label">Titulo de educación:</label>
+            <input type="text" name="titulo" class="form-control" id="titulo-educacion"
+            [(ngModel)]="tituloEdu" #titulo="ngModel" required
+            >
+
+          <div class="mb-3">
+            <label for="fecha-educacion" class="col-form-label">Año de educación:</label>
+            <input type="number" name="fecha" class="form-control" id="fecha-educacion"
+            [(ngModel)]="fechaEdu" required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="descripcion-educacion" class="col-form-label">Descripción:</label>
+            <textarea class="form-control" name="descripcion" id="descripcion-educacion"
+            [(ngModel)]="descripcionEdu" required
+            ></textarea>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary"  [disabled]="!addForm.valid">Send message</button>
+          </div>
+        
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,3 +1,18 @@
+<app-modal-delete
+    [educacionIn]="educacionBorrar"
+    (deleteEducacion)="eliminarEducacion($event)"
+>
+</app-modal-delete>
+
+<app-add-modal
+   (onAddEducacion)="addEducacion($event)"
+>
+</app-add-modal>
+
+<app-edit-modal
+ [educacionIn]="editarEstaEducacion"
+ (onEditEducacion)="editarEducacion($event)"
+></app-edit-modal>
 
 <div class="d-flex container align-items-center"> 
    <h1>Educacion</h1>
@@ -9,14 +24,11 @@
  *ngFor="let educacion of listaEducacion"
  [educationItem]="educacion"
  (educacionABorrar)="pasoAlModal($event)"
+ (educacionAEditar)="pasoAlEditModal($event)"
  >
 </app-education-item>
 
-<app-modal-delete
-    [educacionIn]="educacionBorrar"
-    (deleteEducacion)="eliminarEducacion($event)"
->
-</app-modal-delete>
+
 
 
 

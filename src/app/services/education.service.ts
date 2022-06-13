@@ -26,7 +26,7 @@ export class EducationService {
   }
 
   //El método que edita una educacion
-  public upadateEducacion(educacionId: number, educacion: Educacion):Observable<Educacion>{
+  public updateEducacion(educacionId: number, educacion: Educacion):Observable<Educacion>{
     return this.http.put<Educacion>(`${this.apiServerUrl}/educacion/${educacionId}/edit`, educacion);
   }
 

@@ -11,6 +11,7 @@ export class EducationItemComponent implements OnInit {
 
   @Input() educationItem: Educacion = <Educacion>{};
   @Output() educacionABorrar: EventEmitter<Educacion> = new EventEmitter();
+  @Output() educacionAEditar: EventEmitter<Educacion> = new EventEmitter();
   
   constructor() { }
 
@@ -20,6 +21,12 @@ export class EducationItemComponent implements OnInit {
   seleccion(item: Educacion){
     this.educacionABorrar.emit(item)
     console.log("1 estoy seleccionando y emitiendo la siguiente educacion: " + JSON.stringify(item));
+    
+  }
+
+  editar(item: Educacion){
+    this.educacionAEditar.emit(item)
+    console.log("1 estoy seleccionando y emitiendo la siguiente educacion para editar: " + JSON.stringify(item));
     
   }
 
