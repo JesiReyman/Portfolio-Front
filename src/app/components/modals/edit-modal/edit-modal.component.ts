@@ -18,12 +18,11 @@ export class EditModalComponent implements OnInit {
   }
 
   onSubmit(editForm: NgForm){
-    
+    editForm.value["id_Edu"] = this.educacionIn.id_Edu ;
     this.educacionEditada = editForm.value;
     this.onEditEducacion.emit(this.educacionEditada)
-    console.log("ya se emitio desde el modal: " + JSON.stringify(this.educacionEditada));
-    
-
+    console.log("ya se emitio desde el modal la educacion editada: " + JSON.stringify(this.educacionEditada));
+  
   }
 
 }

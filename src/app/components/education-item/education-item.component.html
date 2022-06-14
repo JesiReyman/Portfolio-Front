@@ -1,20 +1,28 @@
 
-<div class="d-flex container align-items-center justify-content-between">
-    <h3>{{educationItem.tituloEdu}}</h3>
-    {{educationItem.fechaEdu}}
-    {{educationItem.descripcionEdu}}
-    <div class="d-flex">
+<div class="container">
+  <div class="card"> 
+    <div class="card-header d-flex">
+       <h5>{{educationItem.tituloEdu}} </h5> 
 
-      <app-edit-button
-      (click)="editar(educationItem)"
-      ></app-edit-button>
-      
-      <app-delete-button
-      (click)="seleccion(educationItem)"
-      ></app-delete-button>
+      <div class="ms-auto">
+        <app-edit-button
+        (click)="editar(educationItem)"
+        ></app-edit-button>
+        
+        <app-delete-button
+        (click)="seleccion(educationItem)"
+       ></app-delete-button>
+      </div>
+         
     </div>
     
+    <div class="card-body">
+      <h5 class="card-title">{{educationItem.fechaEdu}}</h5>
+      <p class="card-text">{{educationItem.descripcionEdu}}</p>
+    </div>
+  </div>
+</div>
+  
 
-</div> 
 
 

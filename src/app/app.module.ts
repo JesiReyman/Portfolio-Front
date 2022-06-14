@@ -14,6 +14,8 @@ import { EditButtonComponent } from './components/buttons/edit-button/edit-butto
 import { AddButtonComponent } from './components/buttons/add-button/add-button.component';
 import { AddModalComponent } from './components/modals/add-modal/add-modal.component';
 import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
+import { SkillComponent } from './components/skill/skill.component';
+import { SkillItemComponent } from './components/skill-item/skill-item.component';
 
 
 
@@ -28,7 +30,9 @@ import { EditModalComponent } from './components/modals/edit-modal/edit-modal.co
     EditButtonComponent,
     AddButtonComponent,
     AddModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    SkillComponent,
+    SkillItemComponent
   ],
   imports: [
     BrowserModule,

@@ -9,27 +9,21 @@ import { Educacion } from 'src/app/models/educacion';
 })
 export class AddModalComponent implements OnInit {
   @Output() onAddEducacion: EventEmitter<Educacion> = new EventEmitter();
-
-  id_Edu : number = 0;
-  tituloEdu: string = "";
-  fechaEdu: number = NaN;
-  descripcionEdu: string = ""; 
+  nuevaEducacion: Educacion = <Educacion>{};
   
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onSubmit(addForm: NgForm){
+    addForm.value["id_Edu"] = 0;
+    this.nuevaEducacion = addForm.value
     
-    const {id_Edu, tituloEdu, fechaEdu, descripcionEdu} = this
-    const nuevaEducacion={id_Edu, tituloEdu, fechaEdu, descripcionEdu}
-   
-    this.onAddEducacion.emit(nuevaEducacion);
+    console.log("ya se emitio desde el modal: " + JSON.stringify(addForm.value));
+    this.onAddEducacion.emit(this.nuevaEducacion);
     addForm.resetForm();
 
-    console.log("ya se emitio desde el modal: " + JSON.stringify(nuevaEducacion));
   }
 
 }
