@@ -16,6 +16,9 @@ import { AddModalComponent } from './components/modals/add-modal/add-modal.compo
 import { EditModalComponent } from './components/modals/edit-modal/edit-modal.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { SkillItemComponent } from './components/skill-item/skill-item.component';
+import { DeleteSkillComponent } from './components/modals/delete-skill/delete-skill.component';
+import { ExperienciaComponent } from './components/experiencia/experiencia.component';
+import { ExperienciaItemComponent } from './components/experiencia-item/experiencia-item.component';
 
 
 
@@ -32,7 +35,10 @@ import { SkillItemComponent } from './components/skill-item/skill-item.component
     AddModalComponent,
     EditModalComponent,
     SkillComponent,
-    SkillItemComponent
+    SkillItemComponent,
+    DeleteSkillComponent,
+    ExperienciaComponent,
+    ExperienciaItemComponent
   ],
   imports: [
     BrowserModule,

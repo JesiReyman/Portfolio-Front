@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Skill } from 'src/app/models/skill';
 import { SkillService } from 'src/app/services/skill.service';
 
@@ -11,6 +11,8 @@ import { SkillService } from 'src/app/services/skill.service';
 export class SkillComponent implements OnInit {
 
   listaSkill: Skill[] = [];
+  emitirAlModal: Skill = <Skill>{};
+
   constructor(private skillService: SkillService) { }
 
   ngOnInit(): void {
@@ -26,6 +28,11 @@ export class SkillComponent implements OnInit {
         alert(error.message);
       }
     })
+  }
+
+  mandoAlModal(item: Skill){
+    this.emitirAlModal = item;
+    console.log("desde skill paso al modal: " +  JSON.stringify(this.emitirAlModal));
   }
 
 }

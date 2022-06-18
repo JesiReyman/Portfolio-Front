@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Skill } from 'src/app/models/skill';
 
 @Component({
@@ -9,9 +9,20 @@ import { Skill } from 'src/app/models/skill';
 export class SkillItemComponent implements OnInit {
 
   @Input() skillItem: Skill = <Skill>{};
-  constructor() { }
+  @Output() mandarSkill: EventEmitter<Skill> = new EventEmitter();
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  seleccion(item: Skill){
+    this.mandarSkill.emit(item);
+    console.log("Estoy seleccionando el siguiente skill: " + JSON.stringify(item));
+    
+    }
+
+    
 }
+
+

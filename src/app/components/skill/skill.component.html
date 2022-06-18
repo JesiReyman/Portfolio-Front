@@ -1,7 +1,17 @@
+<app-modal-delete
+    [skill]="emitirAlModal"
+></app-modal-delete>
+
 <div class="d-flex container align-items-center"> 
     <h1>Skills</h1>
-</div>
+    <div>
+       <app-add-button></app-add-button>
+    </div>
+ </div>
+
 <app-skill-item
-*ngFor="let skill of listaSkill"
-[skillItem]="skill"
-></app-skill-item>
+    *ngFor="let skill of listaSkill"
+    [skillItem]="skill"
+    (mandarSkill)="mandoAlModal($event)"
+>
+</app-skill-item>

@@ -1,6 +1,7 @@
-export interface Educacion{
-    id_Edu : number;
+export interface Educacion {
+    id_Edu: number;
     tituloEdu: string;
     fechaEdu: number;
-    descripcionEdu: string; 
+    descripcionEdu: string;
+        
 }
