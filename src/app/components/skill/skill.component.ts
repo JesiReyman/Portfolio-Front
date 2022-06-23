@@ -30,9 +30,18 @@ export class SkillComponent implements OnInit {
     })
   }
 
-  mandoAlModal(item: Skill){
-    this.emitirAlModal = item;
-    console.log("desde skill paso al modal: " +  JSON.stringify(this.emitirAlModal));
+  borrar(id: number){
+    //this.emitirAlModal = item;
+    console.log("a skill component llega para borrar: " +  id);
+   /* this.skillService.deleteSkill(id).subscribe({
+      next:(response: void)=>{
+        console.log(response);
+        this.getSkillList();
+      },
+      error:(error: HttpErrorResponse)=> {
+        alert(error.message);
+      }
+    })*/
   }
 
 }

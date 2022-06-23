@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 
+
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
@@ -22,12 +23,24 @@ export class ExperienciaComponent implements OnInit {
     this.experienciaService.getAllExperiencia().subscribe({
       next: (response: Experiencia[]) => {
         this.listaExperiencia = response;
-        console.log("trae todas las experiencias")
     },
       error:(error: HttpErrorResponse)=>{
         alert(error.message);
       }
   })
+  }
+
+  delete(experienciaId: number){
+   /* console.log("voy a borrar la siguiente experiencia: " + JSON.stringify(experienciaId));
+    this.experienciaService.deleteExperiencia(experienciaId).subscribe({
+      next:(response: void)=>{
+        console.log(response);
+        this.getListaExperiencia();
+      },
+      error:(error: HttpErrorResponse)=> {
+        alert(error.message);
+      }
+    })*/
   }
 
 }

@@ -1,19 +1,21 @@
-
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Modal Delete -->
+  <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">La educacion a borrar es</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        {{skill?.nombreSkill}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onDelete(educacionIn)">Understood</button>
-        </div>
+          <div class="modal-header">
+            <h5 class="modal-title">{{titulo}}</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+          </div>
+          <div class="modal-body">
+          {{nombreItem}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="activeModal.close(false)">Close</button>
+            <button type="button" class="btn btn-primary"  (click)="activeModal.close(true)">Understood</button>
+          </div>
       </div>
     </div>
-  </div>
+   
+  
+ 
+  
+  

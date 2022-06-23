@@ -3,5 +3,5 @@ export interface Educacion {
     tituloEdu: string;
     fechaEdu: number;
     descripcionEdu: string;
-        
+
 }

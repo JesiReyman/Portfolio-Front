@@ -19,6 +19,7 @@ import { SkillItemComponent } from './components/skill-item/skill-item.component
 import { DeleteSkillComponent } from './components/modals/delete-skill/delete-skill.component';
 import { ExperienciaComponent } from './components/experiencia/experiencia.component';
 import { ExperienciaItemComponent } from './components/experiencia-item/experiencia-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -45,7 +46,8 @@ import { ExperienciaItemComponent } from './components/experiencia-item/experien
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

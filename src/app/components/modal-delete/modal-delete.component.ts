@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { Educacion } from 'src/app/models/educacion';
-import { Skill } from 'src/app/models/skill';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-modal-delete',
@@ -9,29 +9,48 @@ import { Skill } from 'src/app/models/skill';
 })
 export class ModalDeleteComponent implements OnInit {
   
-  @Input() educacionIn:  Educacion = <Educacion>{};
-  @Input() set skill(val: Skill){
-    this.skill = val;
-    console.log("justo cuando llega al input: " + JSON.stringify(val) )
+  @Input() nombreItem:  string = "";
+  @Input() titulo: string = "";
+  
+  //@Output() emito : EventEmitter<any> = new EventEmitter(); 
+ 
+  
+  //@Output() deleteEducacion: EventEmitter<Educacion> = new EventEmitter();
+  
+  
+  constructor(public activeModal: NgbActiveModal, config: NgbModalConfig) {
+    // customize default values of modals used by this component tree
+    config.backdrop = 'static';
+    config.keyboard = false;
    }
-  
-  @Output() deleteEducacion: EventEmitter<Educacion> = new EventEmitter();
-  
-  
-  constructor() { }
 
   ngOnInit(): void {
-    
+  // this.seleccion(this.item);
   }
+  
+  /*
+  seleccion(item: any){
+    if(this.item.hasOwnProperty('tituloExperiencia')){
+      this.itemName = item.tituloExperiencia;
+    } else if (this.item.hasOwnProperty('nombreSkill')){
+      this.itemName = item.nombreSkill;
+    }
 
-  llego(item: any){
-    console.log("llego al modal: " +  JSON.stringify(item))
-  }
+    return this.itemName;
+  }*/
 
-  onDelete(educacionIn: Educacion){
+  /*
+  acepto(){
+    //this.emito.emit(this.item);
+    this.servicioModal.mandarMensaje(true);
+    this.activeModal.dismiss();
+  }*/
+  
+
+ /* onDelete(educacionIn: Educacion){
     this.deleteEducacion.emit(educacionIn);
     console.log("3 el modal pudo emitir: " + JSON.stringify(educacionIn));
     
-  }
+  }*/
 
 }

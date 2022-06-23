@@ -8,4 +8,5 @@
 <app-experiencia-item
 *ngFor="let experiencia of listaExperiencia"
 [experienciaItem]="experiencia"
+(aceptoBorrar)="delete($event)"
 ></app-experiencia-item>
