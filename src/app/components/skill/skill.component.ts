@@ -1,7 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FieldsForm } from 'src/app/models/fieldsForm';
 import { Skill } from 'src/app/models/skill';
+import { ModalsService } from 'src/app/services/modals.service';
 import { SkillService } from 'src/app/services/skill.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-skill',
@@ -11,9 +14,24 @@ import { SkillService } from 'src/app/services/skill.service';
 export class SkillComponent implements OnInit {
 
   listaSkill: Skill[] = [];
-  emitirAlModal: Skill = <Skill>{};
+  
+  formFields: FieldsForm[] =
+   [
+      {
+        nombre:"nombreSkill",
+        type: "text",
+        label: "Nombre de skill",
+        value: " "
+      }
+      ,  {
+        nombre: "nivelSkill",
+        type: "number",
+        label: "Nivel de skill",
+        value: 0
+      }
+    ]   
 
-  constructor(private skillService: SkillService) { }
+  constructor(private skillService: SkillService, private modalsService: ModalsService) { }
 
   ngOnInit(): void {
     this.getSkillList();
@@ -23,6 +41,7 @@ export class SkillComponent implements OnInit {
     this.skillService.getAllSkill().subscribe({
       next: (response: Skill[])=> {
         this.listaSkill = response;
+        console.log("lista de skills: " + JSON.stringify(this.listaSkill))
       },
       error:(error: HttpErrorResponse)=>{
         alert(error.message);
@@ -31,9 +50,9 @@ export class SkillComponent implements OnInit {
   }
 
   borrar(id: number){
-    //this.emitirAlModal = item;
+    
     console.log("a skill component llega para borrar: " +  id);
-   /* this.skillService.deleteSkill(id).subscribe({
+    this.skillService.deleteSkill(id).subscribe({
       next:(response: void)=>{
         console.log(response);
         this.getSkillList();
@@ -41,7 +60,33 @@ export class SkillComponent implements OnInit {
       error:(error: HttpErrorResponse)=> {
         alert(error.message);
       }
-    })*/
+    })
+  }
+
+  openAddModal(fields: FieldsForm[]){
+    let titulo = "Agregar skill: "
+    this.modalsService.openAddModal(fields, titulo);
+
+    this.modalsService.resultado$
+      .pipe(take(1))
+       .subscribe((result: any) => {
+
+        if(result){
+          result['id_Skill'] = 0;
+          console.log("esto llego para agregarse: " + JSON.stringify(result));
+
+          this.skillService.addSkill(result).subscribe({
+            next:(response: Skill) => {
+              this.listaSkill.push(response);
+            },
+            error:(error: HttpErrorResponse)=>{
+              alert(error.message)
+            } 
+        });
+        }
+          
+        })
+    
   }
 
 }

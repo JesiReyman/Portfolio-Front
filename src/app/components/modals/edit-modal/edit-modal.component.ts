@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Editable } from 'src/app/models/editable';
 import { Educacion } from 'src/app/models/educacion';
 
 @Component({

@@ -4,7 +4,7 @@ export interface Skill {
     nivelSkill: number;
 }
 
-               
-    
+
+
 
     

@@ -1,48 +1,49 @@
-
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    
+  
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">Agregar educación</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="addModalLabel">{{titulo}}</h5>
+        <button type="button" class="btn-close" (click)="activeModal.dismiss()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form
-        #addForm="ngForm"
-        class="add-form" 
-        (ngSubmit)="onSubmit(addForm)"
+        [formGroup]="formulario"
         >
-          <div class="mb-3">
-            <label for="tituloEdu" class="col-form-label">Titulo de educación:</label>
-            <input type="text" name="tituloEdu" class="form-control" id="tituloEdu"
-            ngModel #titulo="ngModel" required
-            >
+          <div class="mb-3" *ngFor="let prop of formFields">
+            <label class="col-form-label" >{{prop.label}}</label>
+            <input
+            *ngIf="!prop.nombre.includes('descripcion')"
+            type={{prop.type}} 
+            class="form-control" 
+            formControlName={{prop.nombre}} 
+            required>
 
-          <div class="mb-3">
-            <label for="fechaEdu" class="col-form-label">Año de educación:</label>
-            <input type="number" name="fechaEdu" class="form-control" id="fechaEdu"
-            ngModel required
-            >
+            <textarea *ngIf="prop.nombre.includes('descripcion')" 
+              class="form-control" 
+              formControlName={{prop.nombre}} 
+              required>
+            </textarea>
+
           </div>
 
-          <div class="mb-3">
-            <label for="descripcionEdu" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" name="descripcionEdu" id="descripcionEdu"
-            ngModel required
-            ></textarea>
-          </div>
-          
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid" data-bs-dismiss="modal">Send message</button>
+            <button type="button" class="btn btn-secondary" 
+              (click)="activeModal.close(false)">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" 
+              [disabled]="formulario.invalid" 
+              (click)="activeModal.close(formulario.value)">
+              Send message
+            </button>
           </div>
         
-      </div>
-    </form>
+      
+    </form >
+    
     </div>
   </div>
-</div>
+
 
 
 

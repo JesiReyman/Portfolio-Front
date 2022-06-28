@@ -3,8 +3,5 @@ export interface Experiencia{
     tituloExperiencia: string;
     fechaExperiencia: number;
     descripcionExperiencia: string;
-    
-    
-    
-        
+     
 }

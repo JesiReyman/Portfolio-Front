@@ -2,7 +2,9 @@
 <div class="d-flex container align-items-center"> 
     <h1>Experiencias</h1>
     <div>
-       <app-add-button></app-add-button>
+       <app-add-button
+       (click)="openAddModal(formFields)"
+       ></app-add-button>
     </div>
  </div>
 <app-experiencia-item
