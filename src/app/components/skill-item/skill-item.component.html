@@ -7,11 +7,11 @@
   
         <div class="ms-auto">
           <app-edit-button
-            
+            (click)="openEditModal(skillItem)"
           ></app-edit-button>
           
           <app-delete-button
-          (click)="openModal(skillItem)"
+            (click)="openModal(skillItem)"
           >
           </app-delete-button>
         </div>

@@ -1,26 +1,34 @@
   
-  <div class="modal-dialog">
+<div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">{{titulo}}</h5>
-        <button type="button" class="btn-close" (click)="activeModal.dismiss()" aria-label="Close"></button>
+        <h5 class="modal-title" id="addModalLabel">
+          {{titulo}}
+        </h5>
+        <button type="button" class="btn-close" 
+          (click)="activeModal.close(false)" 
+          aria-label="Close">
+       </button>
       </div>
       <div class="modal-body">
         <form
-        [formGroup]="formulario"
+          [formGroup]="formulario"
         >
           <div class="mb-3" *ngFor="let prop of formFields">
             <label class="col-form-label" >{{prop.label}}</label>
-            <input
-            *ngIf="!prop.nombre.includes('descripcion')"
-            type={{prop.type}} 
-            class="form-control" 
-            formControlName={{prop.nombre}} 
-            required>
 
-            <textarea *ngIf="prop.nombre.includes('descripcion')" 
+            <input *ngIf="!tieneDescripcion(prop.nombre)"
+              type={{prop.type}} 
               class="form-control" 
               formControlName={{prop.nombre}} 
+              value={{prop.value}}
+              required
+            >
+
+            <textarea *ngIf="tieneDescripcion(prop.nombre)" 
+              class="form-control" 
+              formControlName={{prop.nombre}}
+              value={{prop.value}} 
               required>
             </textarea>
 
@@ -39,10 +47,11 @@
           </div>
         
       
-    </form >
+        </form >
     
-    </div>
-  </div>
+      </div>
+   </div>
+</div>
 
 
 

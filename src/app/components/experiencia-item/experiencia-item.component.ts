@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ModalsService } from 'src/app/services/modals.service';
-import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 import { take } from 'rxjs'
+import { FieldsForm } from 'src/app/models/fieldsForm';
  
 
 @Component({
@@ -14,6 +14,7 @@ import { take } from 'rxjs'
 export class ExperienciaItemComponent implements OnInit {
   @Input() experienciaItem : Experiencia = <Experiencia>{};
   @Output() aceptoBorrar: EventEmitter<number> = new EventEmitter();
+  @Output() editarExperiencia: EventEmitter<Experiencia> = new EventEmitter();
   
   
   
@@ -22,26 +23,7 @@ export class ExperienciaItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  editar(item: Experiencia){}
-  seleccion(item: Experiencia){}
-
-  /*openModal(item: Experiencia){
-    //ModalComponent is component name where modal is declare
-    const modalRef = this.modalService.open(ModalDeleteComponent);
-    modalRef.componentInstance.item = item;
-    let titulo: string = "Está por eliminar la siguiente experiencia: ";
-    modalRef.componentInstance.titulo = titulo;
-    modalRef.result.then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
-    });
-    modalRef.componentInstance.emito.subscribe(
-      ($event: any)=> {
-        console.log("vuelve a la experiencia item: " + JSON.stringify($event))})
-
-    }*/
-
+  
      openModal(item: Experiencia){
   
       console.log("abro el modal")
@@ -59,6 +41,42 @@ export class ExperienciaItemComponent implements OnInit {
         })
     }
 
-    
+    editar(item: Experiencia){
+      console.log("selecciono lo siguiente para editar: " + JSON.stringify(item));
+     let formFields: FieldsForm[] =
+      [
+        {
+          nombre:"tituloExperiencia",
+          type: "text",
+          label: "Título de la experiencia",
+          value: item.tituloExperiencia
+        }
+        ,  {
+          nombre: "fechaExperiencia",
+          type: "number",
+          label: "Feha de la experiencia",
+          value: item.fechaExperiencia
+        }
+        , {
+          nombre:"descripcionExperiencia",
+          type: "text",
+          label: "Descripción",
+          value: item.descripcionExperiencia
+        }
+      ]   
+
+      let titulo = "Editar experiencia: "
+      this.servicioModal.openAddModal(formFields, titulo);
+      this.servicioModal.resultado$
+        .pipe(take(1))
+          .subscribe((result: any)=> {
+            console.log("esto es justo antes del if");
+            if(result){
+             result['id_Experiencia'] = item.id_Experiencia;
+             this.editarExperiencia.emit(result);
+             console.log("el objeto editado finalemte es " + JSON.stringify(result));
+            }
+          })
+    }
 
 }

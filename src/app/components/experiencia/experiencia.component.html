@@ -8,7 +8,8 @@
     </div>
  </div>
 <app-experiencia-item
-*ngFor="let experiencia of listaExperiencia"
-[experienciaItem]="experiencia"
-(aceptoBorrar)="delete($event)"
+   *ngFor="let experiencia of listaExperiencia"
+   [experienciaItem]="experiencia"
+   (aceptoBorrar)="delete($event)"
+   (editarExperiencia)="editar($event)"
 ></app-experiencia-item>

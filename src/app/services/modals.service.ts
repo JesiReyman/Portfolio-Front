@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { ModalDeleteComponent } from '../components/modal-delete/modal-delete.component';
+import { ModalDeleteComponent } from '../components/modals/modal-delete/modal-delete.component';
 import { AddModalComponent } from '../components/modals/add-modal/add-modal.component';
 import { FieldsForm } from '../models/fieldsForm';
 

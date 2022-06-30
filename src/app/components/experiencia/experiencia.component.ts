@@ -4,6 +4,7 @@ import { Experiencia } from 'src/app/models/experiencia';
 import { FieldsForm } from 'src/app/models/fieldsForm';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { ModalsService } from 'src/app/services/modals.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class ExperienciaComponent implements OnInit {
   }
 
   delete(experienciaId: number){
-   /* console.log("voy a borrar la siguiente experiencia: " + JSON.stringify(experienciaId));
+    console.log("voy a borrar la siguiente experiencia: " + JSON.stringify(experienciaId));
     this.experienciaService.deleteExperiencia(experienciaId).subscribe({
       next:(response: void)=>{
         console.log(response);
@@ -64,13 +65,47 @@ export class ExperienciaComponent implements OnInit {
       error:(error: HttpErrorResponse)=> {
         alert(error.message);
       }
-    })*/
+    })
   }
 
 
   openAddModal(fields: FieldsForm[]){
     let titulo = "Agregar experiencia:";
     this.modalsService.openAddModal(fields, titulo);
+
+    this.modalsService.resultado$
+      .pipe(take(1))
+       .subscribe((result: any) => {
+
+        if(result){
+          result['id_Experiencia'] = 0;
+          console.log("esto llego para agregarse: " + JSON.stringify(result));
+
+          this.experienciaService.addExperiencia(result).subscribe({
+            next:(response: Experiencia) => {
+              this.listaExperiencia.push(response);
+            },
+            error:(error: HttpErrorResponse)=>{
+              alert(error.message)
+            } 
+        });
+        }
+          
+        })
+  }
+
+
+  editar(item: Experiencia){
+    this.experienciaService.updateExperiencia(item.id_Experiencia, item)
+      .subscribe({
+        next:(response: Experiencia) => {
+          console.log(response);
+          this.getListaExperiencia();
+        },
+        error:(error: HttpErrorResponse)=>{
+          alert(error.message);
+        }
+      })
   }
 
 }

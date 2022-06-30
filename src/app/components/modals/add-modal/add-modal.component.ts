@@ -37,4 +37,8 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
     this.changeDetectorRef.detectChanges();
   }
 
+  tieneDescripcion(nombrePropidad: string){
+    return nombrePropidad.includes('descripcion');
+  }
+
 }

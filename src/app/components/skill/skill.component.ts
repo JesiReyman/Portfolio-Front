@@ -41,7 +41,6 @@ export class SkillComponent implements OnInit {
     this.skillService.getAllSkill().subscribe({
       next: (response: Skill[])=> {
         this.listaSkill = response;
-        console.log("lista de skills: " + JSON.stringify(this.listaSkill))
       },
       error:(error: HttpErrorResponse)=>{
         alert(error.message);
@@ -87,6 +86,19 @@ export class SkillComponent implements OnInit {
           
         })
     
+  }
+
+  editar(item: Skill){
+    this.skillService.updateSkill(item.id_Skill, item)
+      .subscribe({
+        next:(response: Skill) => {
+          console.log(response);
+          this.getSkillList();
+        },
+        error:(error: HttpErrorResponse)=>{
+          alert(error.message);
+        }
+      })
   }
 
 }
