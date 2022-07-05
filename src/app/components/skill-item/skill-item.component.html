@@ -1,19 +1,20 @@
-
-
 <div class="container">
     <div class="card"> 
       <div class="card-header d-flex">
          <h5>{{skillItem.nombreSkill}} </h5> 
   
         <div class="ms-auto">
-          <app-edit-button
-            (click)="openEditModal(skillItem)"
-          ></app-edit-button>
-          
-          <app-delete-button
-            (click)="openModal(skillItem)"
-          >
-          </app-delete-button>
+
+          <app-buttons
+            [title]="'Edit'"
+            (click)="openEditModal(skillItem)">
+          </app-buttons>
+
+          <app-buttons
+            [title]="'Delete'"
+            (click)="openDeleteModal(skillItem)">
+          </app-buttons>
+
         </div>
            
       </div>
@@ -21,9 +22,14 @@
       <div class="card-body">
         <h5 class="card-title">Nivel del Skill</h5>
         <p class="card-text">{{skillItem.nivelSkill}}</p>
+        <app-circle-progress
+          [nivel]="skillItem.nivelSkill">
+        </app-circle-progress>
       </div>
     </div>
   </div>
+
+  
 
   
 

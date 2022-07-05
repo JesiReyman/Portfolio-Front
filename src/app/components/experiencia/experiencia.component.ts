@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/models/experiencia';
-import { FieldsForm } from 'src/app/models/fieldsForm';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { ModalsService } from 'src/app/services/modals.service';
 import { take } from 'rxjs';
@@ -15,28 +14,6 @@ import { take } from 'rxjs';
 export class ExperienciaComponent implements OnInit {
 
   public listaExperiencia: Experiencia[] = [];
-
-  formFields: FieldsForm[] =
-   [
-      {
-        nombre:"tituloExperiencia",
-        type: "text",
-        label: "Título de la experiencia",
-        value: " "
-      }
-      ,  {
-        nombre: "fechaExperiencia",
-        type: "number",
-        label: "Feha de la experiencia",
-        value: 0
-      }
-      , {
-        nombre:"descripcionExperiencia",
-        type: "text",
-        label: "Descripción",
-        value: " "
-      }
-    ]   
 
   constructor(private experienciaService: ExperienciaService, private modalsService: ModalsService) { }
 
@@ -55,8 +32,8 @@ export class ExperienciaComponent implements OnInit {
   })
   }
 
-  delete(experienciaId: number){
-    console.log("voy a borrar la siguiente experiencia: " + JSON.stringify(experienciaId));
+  borrar(experienciaId: number){
+    
     this.experienciaService.deleteExperiencia(experienciaId).subscribe({
       next:(response: void)=>{
         console.log(response);
@@ -69,8 +46,9 @@ export class ExperienciaComponent implements OnInit {
   }
 
 
-  openAddModal(fields: FieldsForm[]){
+  openAddModal(){
     let titulo = "Agregar experiencia:";
+    let fields = Experiencia.getFieldsForm()
     this.modalsService.openAddModal(fields, titulo);
 
     this.modalsService.resultado$
@@ -79,7 +57,6 @@ export class ExperienciaComponent implements OnInit {
 
         if(result){
           result['id_Experiencia'] = 0;
-          console.log("esto llego para agregarse: " + JSON.stringify(result));
 
           this.experienciaService.addExperiencia(result).subscribe({
             next:(response: Experiencia) => {

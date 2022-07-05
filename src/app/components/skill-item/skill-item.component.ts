@@ -3,8 +3,6 @@ import { Skill } from 'src/app/models/skill';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { ModalsService } from 'src/app/services/modals.service';
 import { take } from 'rxjs';
-import { FieldsForm } from 'src/app/models/fieldsForm';
-
 
 @Component({
   selector: 'app-skill-item',
@@ -23,7 +21,7 @@ export class SkillItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModal(item: Skill){
+  openDeleteModal(item: Skill){
     console.log("abro el modal")
       let tituloBorrar = "Está por eliminar el siguiente skill: ";
       this.servicioModal.openModal(tituloBorrar, item.nombreSkill);
@@ -31,42 +29,26 @@ export class SkillItemComponent implements OnInit {
       this.servicioModal.mensaje$
       .pipe(take(1))
         .subscribe((result: boolean)=> {
-          console.log("esto es justo antes del if");
            if(result){
              this.aceptoBorrar.emit(item.id_Skill);
-             console.log("se guardo en borrar: " + result + " y se manda a borrar: " + JSON.stringify(item));
+             
             }
         })
     }
 
     openEditModal(item: Skill){
-     console.log("selecciono lo siguiente para editar: " + JSON.stringify(item));
-     let formFields: FieldsForm[] =
-      [
-       {
-          nombre:"nombreSkill",
-          type: "text",
-          label: "Nombre de skill",
-          value: item.nombreSkill
-       }
-       ,{
-          nombre: "nivelSkill",
-          type: "number",
-          label: "Nivel de skill",
-          value: item.nivelSkill
-        }
-      ]   
+     
+     let titulo = "Editar skill: "
+     let fields = Skill.getFieldsForm(item);
+      
 
-      let titulo = "Editar skill: "
-      this.servicioModal.openAddModal(formFields, titulo);
+      this.servicioModal.openAddModal(fields, titulo);
       this.servicioModal.resultado$
         .pipe(take(1))
           .subscribe((result: any)=> {
-            console.log("esto es justo antes del if");
             if(result){
              result['id_Skill'] = item.id_Skill;
              this.editarSkill.emit(result);
-             console.log("el objeto editado finalemte es " + JSON.stringify(result));
             }
           })
 

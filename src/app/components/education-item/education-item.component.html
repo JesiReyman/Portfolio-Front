@@ -5,13 +5,15 @@
        <h5>{{educationItem.tituloEdu}} </h5> 
 
       <div class="ms-auto">
-        <app-edit-button
-        (click)="editar(educationItem)"
-        ></app-edit-button>
+        <app-buttons
+          [title]="'Edit'"
+          (click)="editar(educationItem)">
+        </app-buttons>
         
-        <app-delete-button
-        (click)="seleccion(educationItem)"
-       ></app-delete-button>
+        <app-buttons
+          [title]="'Delete'"
+          (click)="borrar(educationItem)">
+        </app-buttons>
       </div>
          
     </div>

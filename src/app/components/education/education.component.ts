@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Educacion } from 'src/app/models/educacion';
 import { EducationService } from 'src/app/services/education.service';
+import { ModalsService } from 'src/app/services/modals.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-education',
@@ -11,11 +13,8 @@ import { EducationService } from 'src/app/services/education.service';
 export class EducationComponent implements OnInit {
 
   public listaEducacion: Educacion[] = [];
-  educacionItem: Educacion = <Educacion>{};
-  educacionBorrar: Educacion = <Educacion>{};
-  editarEstaEducacion: Educacion = <Educacion>{};
 
-  constructor(private educacionService: EducationService) { }
+  constructor(private educacionService: EducationService, private modalsService: ModalsService) { }
 
   ngOnInit(): void {
     this.getListaEducacion();
@@ -32,15 +31,33 @@ export class EducationComponent implements OnInit {
   })
   }
 
-  pasoAlModal(item: Educacion){
-    this.educacionBorrar = item;
-    console.log("2 recibo y voy a pasar al modal: " + JSON.stringify(this.educacionBorrar))
+  openAddModal(){
+    let titulo = "Agregar educación:";
+    let fields = Educacion.getFieldsForm()
+    this.modalsService.openAddModal(fields, titulo);
+
+    this.modalsService.resultado$
+      .pipe(take(1))
+       .subscribe((result: any) => {
+
+        if(result){
+          result['id_Edu'] = 0;
+
+          this.educacionService.addEducacion(result).subscribe({
+            next:(response: Educacion) => {
+              this.listaEducacion.push(response);
+            },
+            error:(error: HttpErrorResponse)=>{
+              alert(error.message)
+            } 
+        });
+        }
+          
+        })
   }
 
-  eliminarEducacion(educacion: Educacion): void{
-    console.log("4 al componente educacion llego lo siguiente para eliminar: " + JSON.stringify(educacion));
-    let id = educacion.id_Edu;
-    this.educacionService.deleteEducacion(id).subscribe({
+  borrar(educacionId: number){
+    this.educacionService.deleteEducacion(educacionId).subscribe({
       next:(response: void)=>{
         console.log(response);
         this.getListaEducacion();
@@ -51,32 +68,17 @@ export class EducationComponent implements OnInit {
     })
   }
 
-  addEducacion(educacion: Educacion){
-    console.log("a educacion llego: " + JSON.stringify(educacion));
-    this.educacionService.addEducacion(educacion).subscribe({
-      next:(response: Educacion) => {
-        this.listaEducacion.push(response);
-      },
-      error:(error: HttpErrorResponse)=>{
-        alert(error.message)
-      } 
-  });
-  }
-
-  pasoAlEditModal(item: Educacion){
-    this.editarEstaEducacion = item;
-  }
-
-  editarEducacion(educacion: Educacion){
-    this.educacionService.updateEducacion(educacion.id_Edu, educacion).subscribe({
-      next: (response: Educacion) => {
-        console.log(response);
-        this.getListaEducacion();
-      }, 
-      error:(error: HttpErrorResponse)=> {
-        alert(error.message);
-      }
-    })
+  editar(item: Educacion){
+    this.educacionService.updateEducacion(item.id_Edu, item)
+      .subscribe({
+        next:(response: Educacion) => {
+          console.log(response);
+          this.getListaEducacion();
+        },
+        error:(error: HttpErrorResponse)=>{
+          alert(error.message);
+        }
+      })
   }
 
 }

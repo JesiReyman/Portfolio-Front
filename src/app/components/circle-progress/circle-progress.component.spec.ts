@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteButtonComponent } from './delete-button.component';
+import { CircleProgressComponent } from './circle-progress.component';
 
-describe('DeleteButtonComponent', () => {
-  let component: DeleteButtonComponent;
-  let fixture: ComponentFixture<DeleteButtonComponent>;
+describe('CircleProgressComponent', () => {
+  let component: CircleProgressComponent;
+  let fixture: ComponentFixture<CircleProgressComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteButtonComponent ]
+      declarations: [ CircleProgressComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteButtonComponent);
+    fixture = TestBed.createComponent(CircleProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

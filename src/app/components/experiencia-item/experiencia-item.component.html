@@ -4,13 +4,16 @@
          <h5>{{experienciaItem.tituloExperiencia}} </h5> 
   
         <div class="ms-auto">
-          <app-edit-button
-          (click)="editar(experienciaItem)"
-          ></app-edit-button>
+          <app-buttons
+            [title]="'Edit'"
+            (click)="editar(experienciaItem)">
+          </app-buttons>
           
-          <app-delete-button
-          (click)="openModal(experienciaItem)"
-         ></app-delete-button>
+         <app-buttons
+            [title]="'Delete'"
+            (click)="openDeleteModal(experienciaItem)">
+         </app-buttons>
+
         </div>
            
       </div>

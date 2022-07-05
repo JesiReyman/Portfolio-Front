@@ -2,14 +2,17 @@
 <div class="d-flex container align-items-center"> 
    <h1>Educacion</h1>
    <div>
-      <app-add-button></app-add-button>
+      <app-buttons
+         [title]="'Add'"
+         (click)="openAddModal()">
+      </app-buttons>
    </div>
 </div>
 <app-education-item
  *ngFor="let educacion of listaEducacion"
  [educationItem]="educacion"
- (educacionABorrar)="pasoAlModal($event)"
- (educacionAEditar)="pasoAlEditModal($event)"
+ (aceptoBorrar)="borrar($event)"
+ (editarEducacion)="editar($event)"
  >
 </app-education-item>
 

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Educacion } from 'src/app/models/educacion';
+import { ModalsService } from 'src/app/services/modals.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -10,23 +12,43 @@ import { Educacion } from 'src/app/models/educacion';
 export class EducationItemComponent implements OnInit {
 
   @Input() educationItem: Educacion = <Educacion>{};
-  @Output() educacionABorrar: EventEmitter<Educacion> = new EventEmitter();
-  @Output() educacionAEditar: EventEmitter<Educacion> = new EventEmitter();
+  @Output() aceptoBorrar: EventEmitter<number> = new EventEmitter();
+  @Output() editarEducacion: EventEmitter<Educacion> = new EventEmitter();
   
-  constructor() { }
+  constructor(private servicioModal: ModalsService) { }
 
   ngOnInit(): void {
   }
 
-  seleccion(item: Educacion){
-    this.educacionABorrar.emit(item)
-    console.log("1 estoy seleccionando y emitiendo la siguiente educacion: " + JSON.stringify(item));
+  borrar(item: Educacion){
+    console.log("abro el modal")
+      let tituloBorrar = "Está por eliminar la siguiente educación: ";
+      this.servicioModal.openModal(tituloBorrar, item.tituloEdu);
+      
+      this.servicioModal.mensaje$
+      .pipe(take(1))
+        .subscribe((result: boolean)=> {
+          console.log("esto es justo antes del if");
+           if(result){
+             this.aceptoBorrar.emit(item.id_Edu);
+            }
+        })
     
   }
 
   editar(item: Educacion){
-    this.educacionAEditar.emit(item)
-    console.log("1 estoy seleccionando y emitiendo la siguiente educacion para editar: " + JSON.stringify(item));
+    let titulo = "Editar educación: "
+      let fields = Educacion.getFieldsForm(item);
+
+      this.servicioModal.openAddModal(fields, titulo);
+      this.servicioModal.resultado$
+        .pipe(take(1))
+          .subscribe((result: any)=> {
+            if(result){
+             result['id_Edu'] = item.id_Edu;
+             this.editarEducacion.emit(result);
+            }
+          })
     
   }
 
