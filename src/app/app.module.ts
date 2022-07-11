@@ -18,6 +18,8 @@ import { ExperienciaComponent } from './components/experiencia/experiencia.compo
 import { ExperienciaItemComponent } from './components/experiencia-item/experiencia-item.component';
 import { ButtonsComponent } from './components/buttons/buttons.component';
 import { CircleProgressComponent } from './components/circle-progress/circle-progress.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 
 
 
@@ -34,7 +36,9 @@ import { CircleProgressComponent } from './components/circle-progress/circle-pro
     ExperienciaComponent,
     ExperienciaItemComponent,
     ButtonsComponent,
-    CircleProgressComponent
+    CircleProgressComponent,
+    NavbarComponent,
+    LoginModalComponent
   ],
   imports: [
     BrowserModule,

@@ -43,4 +43,8 @@ export class ModalsService {
     })
   }
 
+  openLoginModal(){
+    console.log("esto abre el login modal");
+  }
+
 }
