@@ -10,10 +10,10 @@
     </div>
 </div>
 
-<app-skill-item
-    *ngFor="let skill of listaSkill"
-    [skillItem]="skill"
-    (aceptoBorrar)="borrar($event)"
-    (editarSkill)="editar($event)"
->
-</app-skill-item>
+<div cdkDropList class="d-flex container" (cdkDropListDropped)="drop($event)">
+    
+    <app-skill-item *ngFor="let skill of listaSkill" [skillItem]="skill" (aceptoBorrar)="borrar($event)"
+        (editarSkill)="editar($event)">
+    </app-skill-item>
+    
+</div>

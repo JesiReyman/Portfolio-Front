@@ -4,6 +4,7 @@ import { Skill } from 'src/app/models/skill';
 import { ModalsService } from 'src/app/services/modals.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { take } from 'rxjs';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-skill',
@@ -83,6 +84,10 @@ export class SkillComponent implements OnInit {
           alert(error.message);
         }
       })
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.listaSkill, event.previousIndex, event.currentIndex);
   }
 
 }

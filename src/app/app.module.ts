@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgCircleProgressModule } from 'ng-circle-progress'
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { DialogModule } from '@angular/cdk/dialog';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,8 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
 import { CircleProgressComponent } from './components/circle-progress/circle-progress.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
+import { HomeComponent } from './components/home/home.component';
+import { InterceptorService } from './services/interceptor.service';
 
 
 
@@ -38,7 +42,8 @@ import { LoginModalComponent } from './components/modals/login-modal/login-modal
     ButtonsComponent,
     CircleProgressComponent,
     NavbarComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +52,16 @@ import { LoginModalComponent } from './components/modals/login-modal/login-modal
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    DialogModule,
+    DragDropModule,
     NgCircleProgressModule.forRoot({})
   ],
-  providers: [],
+  providers: [
+    {
+     provide: HTTP_INTERCEPTORS,
+     useClass: InterceptorService,
+     multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
