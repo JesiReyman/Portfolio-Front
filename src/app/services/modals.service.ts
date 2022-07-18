@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ModalDeleteComponent } from '../components/modals/modal-delete/modal-delete.component';
 import { AddModalComponent } from '../components/modals/add-modal/add-modal.component';
 import { FieldsForm } from '../models/fieldsForm';
@@ -15,14 +15,20 @@ import { JwtDto } from '../models/jwt-dto';
   providedIn: 'root',
 })
 export class ModalsService {
-  
+
   constructor(
-    private modalService: NgbModal) {}
+    private modalService: NgbModal, private tokenService: TokenService) {}
   mensajeEnviado = new Subject<boolean>();
   mensaje$ = this.mensajeEnviado.asObservable();
 
   resultadoFormulario = new Subject<object>();
   resultado$ = this.resultadoFormulario.asObservable();
+
+  private isLogged = new BehaviorSubject<boolean>(false);
+  public isLogged$: Observable<boolean> = this.isLogged;
+
+  private loginData = new BehaviorSubject<Array<boolean>>([]);
+  public loginData$: Observable<Array<boolean>> = this.loginData;
 
   openModal(titulo: string, nombreItem: string): void {
     //ModalComponent is component name where modal is declare
@@ -60,6 +66,21 @@ export class ModalsService {
   openLoginModal(): void {
     console.log('esto abre el login modal');
     const modalRef = this.modalService.open(LoginModalComponent);
+    
+    modalRef.result.then((result)=> {
+      let logged
+      console.log("esto se imprime cuando llega al servicio: " + result);
+      if(Array.isArray(result)){
+        console.log("este es el primer elemento del array: " + result[0])
+        logged = result[0];
+        this.loginData.next(result);
+      } else {
+        console.log("no es un array")
+        logged = result;
+      }
+      this.isLogged.next(logged);
+    })
+    
+  } 
 
-  }
 }

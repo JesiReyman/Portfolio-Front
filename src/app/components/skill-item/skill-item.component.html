@@ -1,33 +1,28 @@
-<div class="container"  cdkDrag>
-    <div class="card" style="max-width: 18rem;"> 
-      <div class="card-header d-flex">
-         <h5>{{skillItem.nombreSkill}} </h5> 
-  
-        <div class="ms-auto">
+<div class="container" cdkDrag>
+  <div class="card" style="max-width: 18rem;">
+    <div class="card-header d-flex">
+      <h5>{{skillItem.nombreSkill}} </h5>
 
-          <app-buttons
-            [title]="'Edit'"
-            (click)="openEditModal(skillItem)">
-          </app-buttons>
+      <div class="ms-auto">
 
-          <app-buttons
-            [title]="'Delete'"
-            (click)="openDeleteModal(skillItem)">
-          </app-buttons>
+        <app-buttons [title]="'Edit'" (click)="openEditModal(skillItem)">
+        </app-buttons>
 
-        </div>
-           
+        <app-buttons [title]="'Delete'" (click)="openDeleteModal(skillItem)">
+        </app-buttons>
+
       </div>
-      
-      <div class="card-body">
-        <h5 class="card-title">Nivel del Skill</h5>
-        <p class="card-text">{{skillItem.nivelSkill}}</p>
-        <app-circle-progress
-          [nivel]="skillItem.nivelSkill">
-        </app-circle-progress>
-      </div>
+
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">Nivel del Skill</h5>
+      <p class="card-text">{{skillItem.nivelSkill}}</p>
+      <app-circle-progress [nivel]="skillItem.nivelSkill">
+      </app-circle-progress>
     </div>
   </div>
+</div>
 
   
 

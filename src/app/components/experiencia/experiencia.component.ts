@@ -9,80 +9,77 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.css']
+  styleUrls: ['./experiencia.component.css'],
 })
 export class ExperienciaComponent implements OnInit {
-
   public listaExperiencia: Experiencia[] = [];
 
-  constructor(private experienciaService: ExperienciaService, private modalsService: ModalsService) { }
+  constructor(
+    private experienciaService: ExperienciaService,
+    private modalsService: ModalsService
+  ) {}
 
   ngOnInit(): void {
     this.getListaExperiencia();
   }
 
-  getListaExperiencia(): void{
+  getListaExperiencia(): void {
     this.experienciaService.getAllExperiencia().subscribe({
       next: (response: Experiencia[]) => {
         this.listaExperiencia = response;
-    },
-      error:(error: HttpErrorResponse)=>{
-        alert(error.message);
-      }
-  })
-  }
-
-  borrar(experienciaId: number){
-    
-    this.experienciaService.deleteExperiencia(experienciaId).subscribe({
-      next:(response: void)=>{
-        console.log(response);
-        this.getListaExperiencia();
       },
-      error:(error: HttpErrorResponse)=> {
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
-      }
-    })
+      },
+    });
   }
 
+  borrar(experienciaId: number) {
+    this.experienciaService.deleteExperiencia(experienciaId).subscribe({
+      next: () => {
+        this.listaExperiencia = this.listaExperiencia.filter(
+          (experiencia) => experiencia.id_Experiencia !== experienciaId
+        );
+        //this.getListaExperiencia();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
 
-  openAddModal(){
-    let titulo = "Agregar experiencia:";
-    let fields = Experiencia.getFieldsForm()
+  openAddModal() {
+    let titulo = 'Agregar experiencia:';
+    let fields = Experiencia.getFieldsForm();
     this.modalsService.openAddModal(fields, titulo);
 
-    this.modalsService.resultado$
-      .pipe(take(1))
-       .subscribe((result: any) => {
+    this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
+      if (result) {
+        result['id_Experiencia'] = 0;
 
-        if(result){
-          result['id_Experiencia'] = 0;
-
-          this.experienciaService.addExperiencia(result).subscribe({
-            next:(response: Experiencia) => {
-              this.listaExperiencia.push(response);
-            },
-            error:(error: HttpErrorResponse)=>{
-              alert(error.message)
-            } 
+        this.experienciaService.addExperiencia(result).subscribe({
+          next: (response: Experiencia) => {
+            this.listaExperiencia.push(response);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          },
         });
-        }
-          
-        })
+      }
+    });
   }
 
-
-  editar(item: Experiencia){
-    this.experienciaService.updateExperiencia(item.id_Experiencia, item)
+  editar(item: Experiencia) {
+    this.experienciaService
+      .updateExperiencia(item.id_Experiencia, item)
       .subscribe({
-        next:(response: Experiencia) => {
+        next: (response: Experiencia) => {
           console.log(response);
           this.getListaExperiencia();
         },
-        error:(error: HttpErrorResponse)=>{
+        error: (error: HttpErrorResponse) => {
           alert(error.message);
-        }
-      })
+        },
+      });
   }
-
 }

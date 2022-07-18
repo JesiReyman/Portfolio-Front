@@ -28,6 +28,7 @@
         <div class="navbar">
           <a class="navbar-brand" href="#"><i class="fa-brands fa-linkedin fa-xl"></i></a>
           <a class="navbar-brand" href="#"><i class="fa-brands fa-github-square fa-xl"></i></a>
-          <a class="navbar-brand" (click)="openLoginModal()"><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a class="navbar-brand" href="#" title="Entrar" (click)="openLoginModal()" *ngIf="!isLogged" ><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a class="navbar-brand" href="#" title="Salir" (click)="onLogOut()" *ngIf="isLogged"><i class="fa-solid fa-person-through-window"></i></a>
         </div>
   </nav>

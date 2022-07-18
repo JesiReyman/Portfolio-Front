@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const TOKEN_KEY = "AuthToken";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
+  
+  private logged = new BehaviorSubject<boolean>(false);
+  public logged$: Observable<boolean> = this.logged;
 
-  roles: Array<string> = [];
-  constructor(private router: Router) { }
+  constructor() {}
 
-  public setToken(token: string): void{
+  public setToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getToken(): string{
+  public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY)!;
   }
 
-  public isLogged(): boolean{
-    if(this.getToken()){
-      return true;
-    }
-    return false;
-  }
-
+  /*
   public getUserName(): string{
     if(!this.isLogged()){
       return '';
@@ -37,26 +33,35 @@ export class TokenService {
     const values = JSON.parse(payloadDecoded);
     const username = values.sub;
     return username;
+  }*/
+
+  public isLogged(): void{
+    let isLogged;
+    if(this.getToken()){
+      isLogged = true;
+    } else{
+      isLogged = false;
+    }
+    this.logged.next(isLogged);
   }
 
-  public isAdmin(): boolean{
-    if(!this.isLogged()){
-      return false;
-    }
-    const token = this.getToken();
-    const payload = token.split(".")[1];
+  public isAdmin(): boolean {
+    let isAdmin
+    if(this.getToken()){
+      const token = this.getToken();
+    const payload = token.split('.')[1];
     const payloadDecoded = atob(payload);
     const values = JSON.parse(payloadDecoded);
     const roles = values.roles;
-    if(roles.indexOf('ROLE_ADMIN') < 0){
-      return false;
-    } 
-    return true;
+    isAdmin = roles.includes('ROLE_ADMIN');
+    }else{
+      isAdmin = false;
+    }
+    return isAdmin;
   }
 
-
-  public logOut():void{
-    window.localStorage.clear();
-    this.router.navigate(['/'])
+  public logOut(): void {
+    window.sessionStorage.clear();
+    
   }
 }

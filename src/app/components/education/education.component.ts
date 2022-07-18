@@ -8,77 +8,75 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
-  styleUrls: ['./education.component.css']
+  styleUrls: ['./education.component.css'],
 })
 export class EducationComponent implements OnInit {
-
   public listaEducacion: Educacion[] = [];
 
-  constructor(private educacionService: EducationService, private modalsService: ModalsService) { }
+  constructor(
+    private educacionService: EducationService,
+    private modalsService: ModalsService
+  ) {}
 
   ngOnInit(): void {
     this.getListaEducacion();
   }
 
-  getListaEducacion():void{
+  getListaEducacion(): void {
     this.educacionService.getAllEducacion().subscribe({
       next: (response: Educacion[]) => {
         this.listaEducacion = response;
-    },
-      error:(error: HttpErrorResponse)=>{
+      },
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
-      }
-  })
+      },
+    });
   }
 
-  openAddModal(){
-    let titulo = "Agregar educación:";
-    let fields = Educacion.getFieldsForm()
+  openAddModal() {
+    let titulo = 'Agregar educación:';
+    let fields = Educacion.getFieldsForm();
     this.modalsService.openAddModal(fields, titulo);
 
-    this.modalsService.resultado$
-      .pipe(take(1))
-       .subscribe((result: any) => {
+    this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
+      if (result) {
+        result['id_Edu'] = 0;
 
-        if(result){
-          result['id_Edu'] = 0;
-
-          this.educacionService.addEducacion(result).subscribe({
-            next:(response: Educacion) => {
-              this.listaEducacion.push(response);
-            },
-            error:(error: HttpErrorResponse)=>{
-              alert(error.message)
-            } 
+        this.educacionService.addEducacion(result).subscribe({
+          next: (response: Educacion) => {
+            this.listaEducacion.push(response);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          },
         });
-        }
-          
-        })
+      }
+    });
   }
 
-  borrar(educacionId: number){
+  borrar(educacionId: number) {
     this.educacionService.deleteEducacion(educacionId).subscribe({
-      next:(response: void)=>{
+      next: () => {
+        this.listaEducacion = this.listaEducacion.filter(
+          (educacion) => educacion.id_Edu !== educacionId
+        );
+        //this.getListaEducacion();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
+
+  editar(item: Educacion) {
+    this.educacionService.updateEducacion(item.id_Edu, item).subscribe({
+      next: (response: Educacion) => {
         console.log(response);
         this.getListaEducacion();
       },
-      error:(error: HttpErrorResponse)=> {
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
-      }
-    })
+      },
+    });
   }
-
-  editar(item: Educacion){
-    this.educacionService.updateEducacion(item.id_Edu, item)
-      .subscribe({
-        next:(response: Educacion) => {
-          console.log(response);
-          this.getListaEducacion();
-        },
-        error:(error: HttpErrorResponse)=>{
-          alert(error.message);
-        }
-      })
-  }
-
 }
