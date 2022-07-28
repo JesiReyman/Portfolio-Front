@@ -1,5 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FieldsForm } from 'src/app/models/fieldsForm';
 
@@ -12,7 +12,7 @@ import { FieldsForm } from 'src/app/models/fieldsForm';
 export class AddModalComponent implements OnInit, AfterViewChecked {
   @Input() formFields: FieldsForm[] = [];
   @Input() titulo: string = "";
-  formulario: UntypedFormGroup = {} as UntypedFormGroup;
+  formulario: FormGroup = {} as FormGroup;
       
   group: any = {};
              
@@ -23,13 +23,13 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
 
     console.log("Llego al modal los campos para el formulario: " + JSON.stringify(this.formFields))
 
-    this.formFields.forEach((question: { nombre: string; value: any; }) => {
-      this.group[question.nombre] =  new UntypedFormControl(question.value || '');
+    this.formFields.forEach((question: { nombre: string; value: string | number | null; }) => {
+      this.group[question.nombre] =  new FormControl(question.value);
       console.log(question.nombre);
       console.log(question.nombre.includes('descripcion'));
     });
 
-    this.formulario = new UntypedFormGroup(this.group);
+    this.formulario = new FormGroup(this.group);
 
   }
 

@@ -16,8 +16,8 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class LoginModalComponent implements OnInit {
   loginForm: UntypedFormGroup = {} as UntypedFormGroup;
-  isLogged: boolean = false;
-  isAdmin: boolean = false;
+ // isLogged: boolean = false;
+ // isAdmin: boolean = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -46,17 +46,20 @@ export class LoginModalComponent implements OnInit {
         //Guardo en el sessionStorage el token
         this.tokenService.setToken(token);
 
-        this.isLogged = true;
-        this.isAdmin = this.tokenService.isAdmin();
-        console.log('es admin?: ' + this.isAdmin);
-        let loginData = [this.isLogged, this.isAdmin];
-        this.activeModal.close(loginData);
+       // this.isLogged = true;
+        //this.isAdmin = this.tokenService.isAdmin();
+       // console.log('es admin?: ' + this.isAdmin);
+       // let loginData = [this.isLogged, this.isAdmin];
+        this.activeModal.close();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
-        this.activeModal.close(this.isLogged);
+        this.activeModal.close();
       },
     });
+    //console.log("llamo al metodo isLogged")
+    //this.tokenService.isLogged();
+   
   }
 
   /*

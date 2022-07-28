@@ -2,7 +2,8 @@
     type="button"
     [ngClass]="['btn', colorClass]"
     [attr.title]="[title]"
-    *ngIf="isAdmin && isLogged">
+    *ngIf="isLogged && isAdmin">
     <i [ngClass]="[icono]"></i>
 </button>
 
+<!--TODO: mejorar aspecto de los botones -->

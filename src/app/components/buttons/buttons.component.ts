@@ -21,21 +21,19 @@ export class ButtonsComponent implements OnInit {
     private modalService: ModalsService,
     private tokenService: TokenService
   ) {
-    const merged = merge(
+   /* const merged = merge(
       this.tokenService.logged$,
       this.modalService.loginData$
-    );
+    );*/
 
-    this.subscription = merged.subscribe({
-      next: (data) => {
-        if (Array.isArray(data)) {
-          console.log('llego al boton un array: ' + data);
-          this.isLogged = data[0];
-          this.isAdmin = data[1];
-        } else if (typeof data === 'boolean') {
-          console.log('llego al boton un booleano');
-          this.isLogged = data;
-        }
+    this.subscription = this.tokenService.logged$.subscribe({
+      next: (estaLogueado) => {
+        console.log('llego al boton : ' + estaLogueado);
+        this.isLogged = estaLogueado;
+        if (estaLogueado) {
+          this.isAdmin = this.tokenService.isAdmin();
+          console.log("es admin?: " + this.isAdmin);
+        } 
       },
       error: (error) => {
         console.log(error);
@@ -61,6 +59,7 @@ export class ButtonsComponent implements OnInit {
     }
   }
 
+  /*
   checkIsAdmin() {
     this.isAdmin = this.tokenService.isAdmin();
   }
@@ -72,5 +71,5 @@ export class ButtonsComponent implements OnInit {
       },
     });
     console.log('se ejecuta checkIsLogged y su valor es: ' + this.isLogged);
-  }
+  }*/
 }

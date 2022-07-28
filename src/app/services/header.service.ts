@@ -11,16 +11,16 @@ import { Usuario } from '../models/usuario';
 
 //Pongo la url que defini en environment, que es la que usamos para trabajar con la base
 export class HeaderService {
-  private apiServerUrl = environment.apiBaseUrl;
+  private usuarioServerUrl = environment.apiBaseUrl + '/usuario';
 
   constructor(private http: HttpClient) { }
 
   //Defino los métodos 
   public getUser():Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.apiServerUrl}/usuario/1`);
+    return this.http.get<Usuario>(this.usuarioServerUrl + '/1');
   }
 
   public updateUser(usuario : Usuario):Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.apiServerUrl}/usuario/edit`, usuario);
+    return this.http.put<Usuario>(this.usuarioServerUrl + '/edit', usuario);
   }
 }

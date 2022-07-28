@@ -43,6 +43,7 @@ export class TokenService {
       isLogged = false;
     }
     this.logged.next(isLogged);
+    console.log("dentro de isLogged, se emite: " + isLogged)
   }
 
   public isAdmin(): boolean {

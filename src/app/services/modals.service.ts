@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ModalDeleteComponent } from '../components/modals/modal-delete/modal-delete.component';
 import { AddModalComponent } from '../components/modals/add-modal/add-modal.component';
 import { FieldsForm } from '../models/fieldsForm';
@@ -18,26 +18,21 @@ export class ModalsService {
 
   constructor(
     private modalService: NgbModal, private tokenService: TokenService) {}
-  mensajeEnviado = new Subject<boolean>();
-  mensaje$ = this.mensajeEnviado.asObservable();
+    
+  private _delete = new Subject<boolean>();
+  delete$ = this._delete.asObservable();
 
   resultadoFormulario = new Subject<object>();
   resultado$ = this.resultadoFormulario.asObservable();
 
-  private isLogged = new BehaviorSubject<boolean>(false);
-  public isLogged$: Observable<boolean> = this.isLogged;
-
-  private loginData = new BehaviorSubject<Array<boolean>>([]);
-  public loginData$: Observable<Array<boolean>> = this.loginData;
-
-  openModal(titulo: string, nombreItem: string): void {
-    //ModalComponent is component name where modal is declare
+  openDeleteModal(titulo: string, nombreItem: string): void {
+    
     const modalRef = this.modalService.open(ModalDeleteComponent);
     modalRef.componentInstance.nombreItem = nombreItem;
     modalRef.componentInstance.titulo = titulo;
     modalRef.result
       .then((result) => {
-        this.mensajeEnviado.next(result);
+        this._delete.next(result);
         console.log('voy a mandar lo siguiente a item: ' + result);
       })
       .catch((error) => {
@@ -45,6 +40,7 @@ export class ModalsService {
       });
   }
 
+ 
   openAddModal(formFields: FieldsForm[], titulo: string) {
     const modalRef = this.modalService.open(AddModalComponent);
     modalRef.componentInstance.formFields = formFields;
@@ -67,18 +63,20 @@ export class ModalsService {
     console.log('esto abre el login modal');
     const modalRef = this.modalService.open(LoginModalComponent);
     
-    modalRef.result.then((result)=> {
-      let logged
-      console.log("esto se imprime cuando llega al servicio: " + result);
-      if(Array.isArray(result)){
-        console.log("este es el primer elemento del array: " + result[0])
-        logged = result[0];
-        this.loginData.next(result);
-      } else {
-        console.log("no es un array")
-        logged = result;
-      }
-      this.isLogged.next(logged);
+    modalRef.result.then(()=> {
+      //let logged
+      //console.log("esto se imprime cuando llega al servicio: " + result);
+      //if(Array.isArray(result)){
+      //  console.log("este es el primer elemento del array: " + result[0])
+      //  logged = result[0];
+       // this.loginData.next(result);
+     // } else {
+      //  console.log("no es un array")
+      //  logged = result;
+     // }
+      //this.isLogged.next(logged);
+      console.log("llamo al metodo isLogged")
+      this.tokenService.isLogged();
     })
     
   } 

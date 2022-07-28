@@ -23,12 +23,12 @@ export class EducationItemComponent implements OnInit {
   borrar(item: Educacion){
     console.log("abro el modal")
       let tituloBorrar = "Está por eliminar la siguiente educación: ";
-      this.servicioModal.openModal(tituloBorrar, item.tituloEdu);
+      this.servicioModal.openDeleteModal(tituloBorrar, item.tituloEdu);
       
-      this.servicioModal.mensaje$
+      this.servicioModal.delete$
       .pipe(take(1))
         .subscribe((result: boolean)=> {
-          console.log("esto es justo antes del if");
+          console.log("esto es justo antes del if, y lo que llego es que: " + result);
            if(result){
              this.aceptoBorrar.emit(item.id_Edu);
             }

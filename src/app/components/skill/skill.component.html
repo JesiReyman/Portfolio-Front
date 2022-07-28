@@ -1,19 +1,17 @@
-<div class="d-flex container align-items-center"> 
-    <h1>Skills</h1>
-    <div>
+<div class="d-flex flex-column container seccion">
+    <div class="d-flex flex-wrap ms-2 my-2 align-items-center">
+        <h1>Skills</h1>
 
-        <app-buttons
-            [title]="'Add'"
-            (click)="openAddModal()">
+        <app-buttons [title]="'Add'" (click)="openAddModal()">
         </app-buttons>
 
     </div>
-</div>
-
-<div cdkDropList class="d-flex container justify-content-between" (cdkDropListDropped)="drop($event)">
-    
-    <app-skill-item *ngFor="let skill of listaSkill" [skillItem]="skill" (aceptoBorrar)="borrar($event)"
-        (editarSkill)="editar($event)">
-    </app-skill-item>
-    
+    <!-- TODO: mejorar aspecto transicion -->
+    <div class="d-flex flex-wrap justify-content-evenly" cdkDropListGroup>
+        <app-skill-item *ngFor="let skill of listaSkill;let i=index" [skillItem]="skill" (aceptoBorrar)="borrar($event)"
+            (editarSkill)="editar($event)" cdkDropList cdkDropListOrientation="horizontal"
+            [cdkDropListData]="{item:skill,index:i}" (cdkDropListDropped)="drop($event)">
+            <div class="custom-placeholder" *cdkDragPlaceholder></div>
+        </app-skill-item>
+    </div>
 </div>

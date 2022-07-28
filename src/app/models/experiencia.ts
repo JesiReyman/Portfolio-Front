@@ -26,7 +26,7 @@ export class Experiencia{
                 ,  {
                   nombre: "fechaExperiencia",
                   type: "number",
-                  label: "Feha de la experiencia",
+                  label: "Fecha de la experiencia",
                   value: item.fechaExperiencia
                 }
                 , {
@@ -48,7 +48,7 @@ export class Experiencia{
                   nombre: "fechaExperiencia",
                   type: "number",
                   label: "Feha de la experiencia",
-                  value: 0
+                  value: null
                 }
                 , {
                   nombre:"descripcionExperiencia",

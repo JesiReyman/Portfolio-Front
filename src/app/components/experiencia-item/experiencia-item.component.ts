@@ -22,9 +22,9 @@ export class ExperienciaItemComponent implements OnInit {
   
       console.log("abro el modal")
       let tituloBorrar = "Está por eliminar la siguiente experiencia: ";
-      this.servicioModal.openModal(tituloBorrar, item.tituloExperiencia);
+      this.servicioModal.openDeleteModal(tituloBorrar, item.tituloExperiencia);
       
-      this.servicioModal.mensaje$
+      this.servicioModal.delete$ 
       .pipe(take(1))
         .subscribe((result: boolean)=> {
           console.log("esto es justo antes del if");

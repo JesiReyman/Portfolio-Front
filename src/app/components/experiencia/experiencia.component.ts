@@ -37,10 +37,7 @@ export class ExperienciaComponent implements OnInit {
   borrar(experienciaId: number) {
     this.experienciaService.deleteExperiencia(experienciaId).subscribe({
       next: () => {
-        this.listaExperiencia = this.listaExperiencia.filter(
-          (experiencia) => experiencia.id_Experiencia !== experienciaId
-        );
-        //this.getListaExperiencia();
+        this.getListaExperiencia();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -58,8 +55,8 @@ export class ExperienciaComponent implements OnInit {
         result['id_Experiencia'] = 0;
 
         this.experienciaService.addExperiencia(result).subscribe({
-          next: (response: Experiencia) => {
-            this.listaExperiencia.push(response);
+          next: () => {
+            this.getListaExperiencia();
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);

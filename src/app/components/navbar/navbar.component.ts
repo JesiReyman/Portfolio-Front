@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { merge, Subscription } from 'rxjs';
 import { ModalsService } from 'src/app/services/modals.service';
 import { TokenService } from 'src/app/services/token.service';
-import { take } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +17,13 @@ export class NavbarComponent implements OnInit {
     private modalsService: ModalsService,
     private tokenService: TokenService
   ) {
-    this.subscription = this.modalsService.isLogged$.subscribe((value) => {
-      this.isLogged = value;
-      console.log('el boton login escucho');
+   // const merged = merge(this.modalsService.isLogged$, this.tokenService.logged$);
+
+    this.subscription = this.tokenService.logged$.subscribe({
+      next: (data: boolean) => {
+        this.isLogged = data;
+        console.log('el boton login escucho, y isLogged es: ' + this.isLogged);
+      },
     });
   }
 
@@ -34,18 +38,16 @@ export class NavbarComponent implements OnInit {
   onLogOut() {
     this.tokenService.logOut();
     this.tokenService.isLogged();
-    this.tokenService.logged$.subscribe({
+    /*this.tokenService.logged$.subscribe({
       next: (estaLogueado) => {
         this.isLogged = estaLogueado;
 
         console.log('se ejecuta onlogout y isLogged es: ' + this.isLogged);
       },
-    });
+    });*/
   }
 
   checkToken() {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    }
+    this.tokenService.isLogged();
   }
 }

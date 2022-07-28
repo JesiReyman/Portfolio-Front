@@ -4,7 +4,7 @@ import { Skill } from 'src/app/models/skill';
 import { ModalsService } from 'src/app/services/modals.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { take } from 'rxjs';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, CdkDragEnter, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-skill',
@@ -38,10 +38,7 @@ export class SkillComponent implements OnInit {
     console.log('a skill component llega para borrar: ' + id);
     this.skillService.deleteSkill(id).subscribe({
       next: () => {
-        this.listaSkill = this.listaSkill.filter(
-          (skill) => skill.id_Skill !== id
-        );
-        //this.getSkillList();
+        this.getSkillList();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -60,8 +57,8 @@ export class SkillComponent implements OnInit {
         console.log('esto llego para agregarse: ' + JSON.stringify(result));
 
         this.skillService.addSkill(result).subscribe({
-          next: (response: Skill) => {
-            this.listaSkill.push(response);
+          next: () => {
+            this.getSkillList();
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -83,7 +80,10 @@ export class SkillComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.listaSkill, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<any>) {
+    this.listaSkill[event.previousContainer.data.index] = event.container.data.item;
+    this.listaSkill[event.container.data.index] = event.previousContainer.data.item;
   }
+
+  
 }

@@ -24,9 +24,9 @@ export class SkillItemComponent implements OnInit {
   openDeleteModal(item: Skill){
     console.log("abro el modal")
       let tituloBorrar = "Está por eliminar el siguiente skill: ";
-      this.servicioModal.openModal(tituloBorrar, item.nombreSkill);
+      this.servicioModal.openDeleteModal(tituloBorrar, item.nombreSkill);
      
-      this.servicioModal.mensaje$
+      this.servicioModal.delete$
       .pipe(take(1))
         .subscribe((result: boolean)=> {
            if(result){

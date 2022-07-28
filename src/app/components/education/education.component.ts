@@ -43,8 +43,8 @@ export class EducationComponent implements OnInit {
         result['id_Edu'] = 0;
 
         this.educacionService.addEducacion(result).subscribe({
-          next: (response: Educacion) => {
-            this.listaEducacion.push(response);
+          next: () => {
+            this.getListaEducacion();
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -57,16 +57,14 @@ export class EducationComponent implements OnInit {
   borrar(educacionId: number) {
     this.educacionService.deleteEducacion(educacionId).subscribe({
       next: () => {
-        this.listaEducacion = this.listaEducacion.filter(
-          (educacion) => educacion.id_Edu !== educacionId
-        );
-        //this.getListaEducacion();
+        this.getListaEducacion();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       },
     });
   }
+
 
   editar(item: Educacion) {
     this.educacionService.updateEducacion(item.id_Edu, item).subscribe({

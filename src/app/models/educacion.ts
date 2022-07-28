@@ -26,7 +26,7 @@ export class Educacion {
                 ,  {
                   nombre: "fechaEdu",
                   type: "number",
-                  label: "Feha de la educación",
+                  label: "Fecha de la educación",
                   value: item.fechaEdu
                 }
                 , {
@@ -47,8 +47,8 @@ export class Educacion {
                 ,  {
                   nombre: "fechaEdu",
                   type: "number",
-                  label: "Feha de la educación",
-                  value: 0
+                  label: "Fecha de la educación",
+                  value: null
                 }
                 , {
                   nombre:"descripcionEdu",
