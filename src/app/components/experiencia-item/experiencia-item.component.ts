@@ -29,7 +29,7 @@ export class ExperienciaItemComponent implements OnInit {
         .subscribe((result: boolean)=> {
           console.log("esto es justo antes del if");
            if(result){
-             this.aceptoBorrar.emit(item.id_Experiencia);
+             this.aceptoBorrar.emit(item.experienciaId);
             }
         })
     }
@@ -43,7 +43,7 @@ export class ExperienciaItemComponent implements OnInit {
         .pipe(take(1))
           .subscribe((result: any)=> {
             if(result){
-             result['id_Experiencia'] = item.id_Experiencia;
+             result['experienciaId'] = item.experienciaId;
              this.editarExperiencia.emit(result);
             }
           })

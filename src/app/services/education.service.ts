@@ -9,30 +9,30 @@ import { Educacion } from '../models/educacion';
 })
 export class EducationService {
 
-  private educacionServerUrl = environment.apiBaseUrl + '/educacion';
+  private educacionServerUrl = "http://localhost:8080/educacion";
 
   constructor(private http: HttpClient) { }
 
   //Defino los métodos 
 
   //El método que traer la lista de educaciones
-  public getAllEducacion():Observable<Educacion[]>{
-    return this.http.get<Educacion[]>(this.educacionServerUrl + '/lista');
+  public getAllEducacion(usuario: String):Observable<Educacion[]>{
+    return this.http.get<Educacion[]>(this.educacionServerUrl + `/${usuario}/lista`);
   }
 
   //El método que añade una educacion, pasamos la direccion y además el parámetro educacion que queremos añadir
-  public addEducacion(educacion: Educacion):Observable<Educacion>{
-    return this.http.post<Educacion>(this.educacionServerUrl + '/add', educacion);
+  public addEducacion(educacion: Educacion, usuario: String):Observable<Educacion>{
+    return this.http.post<Educacion>(this.educacionServerUrl + `/${usuario}/add`, educacion);
   }
 
   //El método que edita una educacion
-  public updateEducacion(educacionId: number, educacion: Educacion):Observable<Educacion>{
-    return this.http.put<Educacion>(this.educacionServerUrl + `/${educacionId}/edit`, educacion);
+  public updateEducacion(educacionId: number, educacion: Educacion, usuario: String):Observable<Educacion>{
+    return this.http.put<Educacion>(this.educacionServerUrl + `/${usuario}/edit/${educacionId}`, educacion);
   }
 
   //El método que elimina una educacion
-  public deleteEducacion(educacionId: number):Observable<void>{
-    return this.http.delete<void>(this.educacionServerUrl + `/delete/${educacionId}`);
+  public deleteEducacion(educacionId: number, usuario: String):Observable<void>{
+    return this.http.delete<void>(this.educacionServerUrl + `/${usuario}/delete/${educacionId}`);
   }
 
   

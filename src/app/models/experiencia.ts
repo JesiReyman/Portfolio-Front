@@ -1,13 +1,13 @@
 import { FieldsForm } from "./fieldsForm";
 
 export class Experiencia{
-    id_Experiencia: number;
+    experienciaId: number;
     tituloExperiencia: string;
     fechaExperiencia: number;
     descripcionExperiencia: string;
 
-    constructor(id_Experiencia: number, tituloExperiencia: string, fechaExperiencia: number, descripcionExperiencia: string){
-        this.id_Experiencia = id_Experiencia;
+    constructor(experienciaId: number, tituloExperiencia: string, fechaExperiencia: number, descripcionExperiencia: string){
+        this.experienciaId = experienciaId;
         this.tituloExperiencia = tituloExperiencia;
         this.fechaExperiencia = fechaExperiencia;
         this.descripcionExperiencia = descripcionExperiencia;

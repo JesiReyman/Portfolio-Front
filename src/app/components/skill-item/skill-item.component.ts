@@ -30,7 +30,7 @@ export class SkillItemComponent implements OnInit {
       .pipe(take(1))
         .subscribe((result: boolean)=> {
            if(result){
-             this.aceptoBorrar.emit(item.id_Skill);
+             this.aceptoBorrar.emit(item.skillId);
              
             }
         })
@@ -47,7 +47,7 @@ export class SkillItemComponent implements OnInit {
         .pipe(take(1))
           .subscribe((result: any)=> {
             if(result){
-             result['id_Skill'] = item.id_Skill;
+             result['skillId'] = item.skillId;
              this.editarSkill.emit(result);
             }
           })

@@ -36,7 +36,7 @@ export class LoginModalComponent implements OnInit {
   }
 
   login(loginData: LoginUsuario): void {
-    //console.log("esto trae el modal login: " + JSON.stringify(loginData));
+    console.log("esto trae el modal login: " + JSON.stringify(loginData));
     this.authService.login(loginData).subscribe({
       next: (result) => {
         console.log(
@@ -50,7 +50,7 @@ export class LoginModalComponent implements OnInit {
         //this.isAdmin = this.tokenService.isAdmin();
        // console.log('es admin?: ' + this.isAdmin);
        // let loginData = [this.isLogged, this.isAdmin];
-        this.activeModal.close();
+        this.activeModal.close(loginData.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

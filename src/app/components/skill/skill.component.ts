@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Skill } from 'src/app/models/skill';
 import { ModalsService } from 'src/app/services/modals.service';
 import { SkillService } from 'src/app/services/skill.service';
@@ -13,6 +13,7 @@ import {CdkDragDrop, CdkDragEnter, moveItemInArray} from '@angular/cdk/drag-drop
 })
 export class SkillComponent implements OnInit {
   listaSkill: Skill[] = [];
+  @Input() nombreUsuario: string = "";
 
   constructor(
     private skillService: SkillService,
@@ -20,11 +21,11 @@ export class SkillComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSkillList();
+    this.getSkillList(this.nombreUsuario);
   }
 
-  getSkillList() {
-    this.skillService.getAllSkill().subscribe({
+  getSkillList(nombreUsuario: string) {
+    this.skillService.getAllSkill(nombreUsuario).subscribe({
       next: (response: Skill[]) => {
         this.listaSkill = response;
       },
@@ -36,9 +37,9 @@ export class SkillComponent implements OnInit {
 
   borrar(id: number) {
     console.log('a skill component llega para borrar: ' + id);
-    this.skillService.deleteSkill(id).subscribe({
+    this.skillService.deleteSkill(id, this.nombreUsuario).subscribe({
       next: () => {
-        this.getSkillList();
+        this.getSkillList(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -53,12 +54,12 @@ export class SkillComponent implements OnInit {
 
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
       if (result) {
-        result['id_Skill'] = 0;
+        result['skillId'] = 0;
         console.log('esto llego para agregarse: ' + JSON.stringify(result));
 
-        this.skillService.addSkill(result).subscribe({
+        this.skillService.addSkill(result, this.nombreUsuario).subscribe({
           next: () => {
-            this.getSkillList();
+            this.getSkillList(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -69,10 +70,10 @@ export class SkillComponent implements OnInit {
   }
 
   editar(item: Skill) {
-    this.skillService.updateSkill(item.id_Skill, item).subscribe({
+    this.skillService.updateSkill(item.skillId, item, this.nombreUsuario).subscribe({
       next: (response: Skill) => {
         console.log(response);
-        this.getSkillList();
+        this.getSkillList(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { LoginUsuario } from '../models/login-usuario';
 import { TokenService } from './token.service';
 import { JwtDto } from '../models/jwt-dto';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -24,6 +25,9 @@ export class ModalsService {
 
   resultadoFormulario = new Subject<object>();
   resultado$ = this.resultadoFormulario.asObservable();
+
+  nombreDeUsuario = new Subject<string>();
+  nombre$ = this.nombreDeUsuario.asObservable();
 
   openDeleteModal(titulo: string, nombreItem: string): void {
     
@@ -63,7 +67,7 @@ export class ModalsService {
     console.log('esto abre el login modal');
     const modalRef = this.modalService.open(LoginModalComponent);
     
-    modalRef.result.then(()=> {
+    modalRef.result.then((result)=> {
       //let logged
       //console.log("esto se imprime cuando llega al servicio: " + result);
       //if(Array.isArray(result)){
@@ -71,7 +75,9 @@ export class ModalsService {
       //  logged = result[0];
        // this.loginData.next(result);
      // } else {
-      //  console.log("no es un array")
+      console.log("al servicio llego el siguiente nombre de usuario: " + result);
+      this.nombreDeUsuario.next(result);
+      
       //  logged = result;
      // }
       //this.isLogged.next(logged);

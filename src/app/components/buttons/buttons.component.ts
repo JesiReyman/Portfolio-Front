@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { merge, Subscription } from 'rxjs';
 import { ModalsService } from 'src/app/services/modals.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -16,10 +17,14 @@ export class ButtonsComponent implements OnInit {
   isAdmin: boolean = false;
   isLogged: boolean = false;
   subscription?: Subscription;
+  //currentUserName: string = '';
+  //currentRouteName: string = '';
+  esUsuarioValido: boolean = false;
 
   constructor(
     private modalService: ModalsService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private route: ActivatedRoute
   ) {
    /* const merged = merge(
       this.tokenService.logged$,
@@ -33,6 +38,12 @@ export class ButtonsComponent implements OnInit {
         if (estaLogueado) {
           this.isAdmin = this.tokenService.isAdmin();
           console.log("es admin?: " + this.isAdmin);
+          const currentUserName = this.tokenService.getUserName();
+          console.log("el usuario loggeado es: " + currentUserName);
+          const currentRouteName = this.route.snapshot.params['nombreUsuario'];
+          console.log("la ruta actual es de: " + currentRouteName);
+          this.esUsuarioValido = this.checkUsuario(currentUserName, currentRouteName);
+          console.log("son el mismo usuario?: " + this.esUsuarioValido);
         } 
       },
       error: (error) => {
@@ -59,6 +70,12 @@ export class ButtonsComponent implements OnInit {
     }
   }
 
+  checkUsuario(usuarioLogueado: string, usuarioRuta: string): boolean{
+    if(usuarioLogueado==usuarioRuta){
+      this.esUsuarioValido = true;
+    }
+    return this.esUsuarioValido;
+  }
   /*
   checkIsAdmin() {
     this.isAdmin = this.tokenService.isAdmin();

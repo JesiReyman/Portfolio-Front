@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { ModalsService } from 'src/app/services/modals.service';
@@ -13,6 +13,7 @@ import { take } from 'rxjs';
 })
 export class ExperienciaComponent implements OnInit {
   public listaExperiencia: Experiencia[] = [];
+  @Input() nombreUsuario: string = "";
 
   constructor(
     private experienciaService: ExperienciaService,
@@ -20,11 +21,11 @@ export class ExperienciaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getListaExperiencia();
+    this.getListaExperiencia(this.nombreUsuario);
   }
 
-  getListaExperiencia(): void {
-    this.experienciaService.getAllExperiencia().subscribe({
+  getListaExperiencia(nombreUsuario: string): void {
+    this.experienciaService.getAllExperiencia(nombreUsuario).subscribe({
       next: (response: Experiencia[]) => {
         this.listaExperiencia = response;
       },
@@ -35,9 +36,9 @@ export class ExperienciaComponent implements OnInit {
   }
 
   borrar(experienciaId: number) {
-    this.experienciaService.deleteExperiencia(experienciaId).subscribe({
+    this.experienciaService.deleteExperiencia(experienciaId, this.nombreUsuario).subscribe({
       next: () => {
-        this.getListaExperiencia();
+        this.getListaExperiencia(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -52,11 +53,11 @@ export class ExperienciaComponent implements OnInit {
 
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
       if (result) {
-        result['id_Experiencia'] = 0;
+        result['experienciaId'] = 0;
 
-        this.experienciaService.addExperiencia(result).subscribe({
+        this.experienciaService.addExperiencia(result, this.nombreUsuario).subscribe({
           next: () => {
-            this.getListaExperiencia();
+            this.getListaExperiencia(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -68,11 +69,11 @@ export class ExperienciaComponent implements OnInit {
 
   editar(item: Experiencia) {
     this.experienciaService
-      .updateExperiencia(item.id_Experiencia, item)
+      .updateExperiencia(item.experienciaId, item, this.nombreUsuario)
       .subscribe({
         next: (response: Experiencia) => {
           console.log(response);
-          this.getListaExperiencia();
+          this.getListaExperiencia(this.nombreUsuario);
         },
         error: (error: HttpErrorResponse) => {
           alert(error.message);

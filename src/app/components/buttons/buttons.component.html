@@ -2,7 +2,7 @@
     type="button"
     [ngClass]="['btn', colorClass]"
     [attr.title]="[title]"
-    *ngIf="isLogged && isAdmin">
+    *ngIf="isLogged && (esUsuarioValido || isAdmin)">
     <i [ngClass]="[icono]"></i>
 </button>
 

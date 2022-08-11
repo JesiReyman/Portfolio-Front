@@ -9,29 +9,29 @@ import { Experiencia } from '../models/experiencia';
 })
 export class ExperienciaService {
 
-  private experienciaServerUrl = environment.apiBaseUrl + '/experiencia';
+  private experienciaServerUrl = "http://localhost:8080/experiencia";
 
   constructor(private http: HttpClient) { }
 
   //Defino los métodos 
 
   //El método que traer la lista de experiencias
-  public getAllExperiencia():Observable<Experiencia[]>{
-    return this.http.get<Experiencia[]>(this.experienciaServerUrl + '/lista');
+  public getAllExperiencia(usuario: String):Observable<Experiencia[]>{
+    return this.http.get<Experiencia[]>(this.experienciaServerUrl + `/${usuario}/lista`);
   }
 
   //El método que añade una experiencia, pasamos la direccion y además el parámetro experiencia que queremos añadir
-  public addExperiencia(experiencia: Experiencia):Observable<Experiencia>{
-    return this.http.post<Experiencia>(this.experienciaServerUrl + '/add', experiencia);
+  public addExperiencia(experiencia: Experiencia, usuario: String):Observable<Experiencia>{
+    return this.http.post<Experiencia>(this.experienciaServerUrl + `/${usuario}/add`, experiencia);
   }
 
   //El método que edita una experiencia
-  public updateExperiencia(experienciaId: number, experiencia: Experiencia):Observable<Experiencia>{
-    return this.http.put<Experiencia>(this.experienciaServerUrl + `/${experienciaId}/edit`, experiencia);
+  public updateExperiencia(experienciaId: number, experiencia: Experiencia, usuario: String):Observable<Experiencia>{
+    return this.http.put<Experiencia>(this.experienciaServerUrl + `/${usuario}/edit/${experienciaId}`, experiencia);
   }
 
   //El método que elimina una experiencia
-  public deleteExperiencia(experienciaId: number):Observable<void>{
-    return this.http.delete<void>(this.experienciaServerUrl + `/delete/${experienciaId}`);
+  public deleteExperiencia(experienciaId: number, usuario: String):Observable<void>{
+    return this.http.delete<void>(this.experienciaServerUrl + `/${usuario}/delete/${experienciaId}`);
   }
 }

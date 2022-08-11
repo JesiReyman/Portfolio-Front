@@ -47,6 +47,7 @@ export class EducationItemComponent implements OnInit {
             if(result){
              result['id_Edu'] = item.id_Edu;
              this.editarEducacion.emit(result);
+             console.log("mando esto para editar: " + JSON.stringify(result));
             }
           })
     

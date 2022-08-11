@@ -1,12 +1,12 @@
 import { FieldsForm } from "./fieldsForm";
 
 export class Skill {
-    id_Skill: number;
+    skillId: number;
     nombreSkill: string;
     nivelSkill: number;
 
-    constructor(id_Skill: number, nombreSkill: string, nivelSkill: number){
-        this.id_Skill = id_Skill;
+    constructor(skillId: number, nombreSkill: string, nivelSkill: number){
+        this.skillId = skillId;
         this.nombreSkill = nombreSkill;
         this.nivelSkill = nivelSkill;
     }

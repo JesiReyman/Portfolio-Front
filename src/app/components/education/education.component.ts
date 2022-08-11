@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Educacion } from 'src/app/models/educacion';
 import { EducationService } from 'src/app/services/education.service';
 import { ModalsService } from 'src/app/services/modals.service';
 import { take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-education',
@@ -12,18 +13,23 @@ import { take } from 'rxjs';
 })
 export class EducationComponent implements OnInit {
   public listaEducacion: Educacion[] = [];
+  //userName: string = "";
+  @Input() nombreUsuario: string = "";
 
   constructor(
     private educacionService: EducationService,
-    private modalsService: ModalsService
+    private modalsService: ModalsService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getListaEducacion();
+
+    //this.userName = this.route.snapshot.params['nombreUsuario'];  
+    this.getListaEducacion(this.nombreUsuario);
   }
 
-  getListaEducacion(): void {
-    this.educacionService.getAllEducacion().subscribe({
+  getListaEducacion(nombreUsuario: string): void {
+    this.educacionService.getAllEducacion(nombreUsuario).subscribe({
       next: (response: Educacion[]) => {
         this.listaEducacion = response;
       },
@@ -42,9 +48,9 @@ export class EducationComponent implements OnInit {
       if (result) {
         result['id_Edu'] = 0;
 
-        this.educacionService.addEducacion(result).subscribe({
+        this.educacionService.addEducacion(result, this.nombreUsuario).subscribe({
           next: () => {
-            this.getListaEducacion();
+            this.getListaEducacion(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
@@ -55,9 +61,9 @@ export class EducationComponent implements OnInit {
   }
 
   borrar(educacionId: number) {
-    this.educacionService.deleteEducacion(educacionId).subscribe({
+    this.educacionService.deleteEducacion(educacionId, this.nombreUsuario).subscribe({
       next: () => {
-        this.getListaEducacion();
+        this.getListaEducacion(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -67,10 +73,10 @@ export class EducationComponent implements OnInit {
 
 
   editar(item: Educacion) {
-    this.educacionService.updateEducacion(item.id_Edu, item).subscribe({
+    this.educacionService.updateEducacion(item.id_Edu, item, this.nombreUsuario).subscribe({
       next: (response: Educacion) => {
         console.log(response);
-        this.getListaEducacion();
+        this.getListaEducacion(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

@@ -9,29 +9,29 @@ import { Skill } from '../models/skill';
 })
 export class SkillService {
 
-  private skillServerUrl = environment.apiBaseUrl + '/skill';
+  private skillServerUrl = "http://localhost:8080/skill";
 
   constructor(private http: HttpClient) { }
 
   //Defino los métodos 
 
   //El método que traer la lista de skills
-  public getAllSkill():Observable<Skill[]>{
-    return this.http.get<Skill[]>(this.skillServerUrl + '/lista');
+  public getAllSkill(usuario: String):Observable<Skill[]>{
+    return this.http.get<Skill[]>(this.skillServerUrl + `/${usuario}/lista`);
   }
 
   //El método que añade una skill, pasamos la direccion y además el parámetro skill que queremos añadir
-  public addSkill(skill: Skill):Observable<Skill>{
-    return this.http.post<Skill>(this.skillServerUrl+ '/add', skill);
+  public addSkill(skill: Skill, usuario: String):Observable<Skill>{
+    return this.http.post<Skill>(this.skillServerUrl+ `/${usuario}/add`, skill);
   }
 
   //El método que edita una skill
-  public updateSkill(skillId: number, skill: Skill):Observable<Skill>{
-    return this.http.put<Skill>(this.skillServerUrl+ `/${skillId}/edit`, skill);
+  public updateSkill(skillId: number, skill: Skill, usuario: String):Observable<Skill>{
+    return this.http.put<Skill>(this.skillServerUrl+ `/${usuario}/edit/${skillId}`, skill);
   }
 
   //El método que elimina una skill
-  public deleteSkill(skillId: number):Observable<void>{
-    return this.http.delete<void>(this.skillServerUrl+ `/delete/${skillId}`);
+  public deleteSkill(skillId: number, usuario: String):Observable<void>{
+    return this.http.delete<void>(this.skillServerUrl+ `/${usuario}/delete/${skillId}`);
   }
 }

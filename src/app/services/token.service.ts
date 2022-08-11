@@ -22,18 +22,15 @@ export class TokenService {
     return sessionStorage.getItem(TOKEN_KEY)!;
   }
 
-  /*
+  
   public getUserName(): string{
-    if(!this.isLogged()){
-      return '';
-    }
     const token = this.getToken();
     const payload = token.split(".")[1];
     const payloadDecoded = atob(payload);
     const values = JSON.parse(payloadDecoded);
     const username = values.sub;
     return username;
-  }*/
+  }
 
   public isLogged(): void{
     let isLogged;
