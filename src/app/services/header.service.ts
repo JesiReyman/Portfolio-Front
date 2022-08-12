@@ -20,7 +20,7 @@ export class HeaderService {
     return this.http.get<Perfil>(this.usuarioServerUrl + `/${nombreUsuario}`);
   }
 
-  public updateUser(usuario : Perfil):Observable<Perfil>{
-    return this.http.put<Perfil>(this.usuarioServerUrl + '/edit', usuario);
+  public updateUser(id: number, usuario : Perfil, nombreUsuario: String):Observable<Perfil>{
+    return this.http.put<Perfil>(this.usuarioServerUrl + `/${nombreUsuario}/edit/${id}`, usuario);
   }
 }

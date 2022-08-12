@@ -16,9 +16,12 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private modalService: ModalsService) {
     this.subscription = this.modalService.nombre$.subscribe({
       next: (nombre) => {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-          this.router.navigate([nombre]);
-          });
+        if(nombre){
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([nombre]);
+            });
+        }
+        
         //this.router.navigate([nombre]);
         //window.location.reload();
         //this.nombreUsuario = this.route.snapshot.params['nombreUsuario'];

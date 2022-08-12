@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container-fluid p-0">
   <div class="card"> 
     <div class="card-header d-flex">
        <h5>{{educationItem.tituloEdu}} </h5> 
@@ -18,9 +18,14 @@
          
     </div>
     
-    <div class="card-body">
-      <h5 class="card-title">{{educationItem.fechaEdu}}</h5>
-      <p class="card-text">{{educationItem.descripcionEdu}}</p>
+    <div class="d-flex card-body">
+      <div class="descripcion"> 
+        <p class="card-text">{{educationItem.descripcionEdu}}</p>
+      </div>
+      <div class="fecha ms-auto mx-2"> 
+        <h5 class="card-title">{{educationItem.fechaEdu}}</h5>
+      </div>
+      
     </div>
   </div>
 </div>

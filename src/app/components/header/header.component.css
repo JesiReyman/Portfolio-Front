@@ -1,0 +1,27 @@
+.container-header{
+    margin-bottom: 2%;
+}
+
+.portada {
+  width: 100%;
+  max-height: 37.5rem;
+}
+
+.img-perfil {
+  max-width: 40%;
+  max-height: 20%;
+}
+
+.container-perfil {
+  margin-top: -15%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 5%;
+  margin-right: 5%;
+  
+}
+
+.container-presentacion {
+  margin-top: 15%;
+  text-align: center;
+}
