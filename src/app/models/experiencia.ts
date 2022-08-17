@@ -3,14 +3,18 @@ import { FieldsForm } from "./fieldsForm";
 export class Experiencia{
     experienciaId: number;
     tituloExperiencia: string;
-    fechaExperiencia: number;
+    anioInicio: number = new Date().getFullYear();
+    anioFin: number = new Date().getFullYear();
+    actualidad: boolean;
     descripcionExperiencia: string;
 
-    constructor(experienciaId: number, tituloExperiencia: string, fechaExperiencia: number, descripcionExperiencia: string){
+    constructor(experienciaId: number, tituloExperiencia: string, anioInicio: number, anioFin: number, actualidad: boolean, descripcionExperiencia: string){
         this.experienciaId = experienciaId;
         this.tituloExperiencia = tituloExperiencia;
-        this.fechaExperiencia = fechaExperiencia;
+        this.anioInicio = anioInicio;
         this.descripcionExperiencia = descripcionExperiencia;
+        this.anioFin = anioFin;
+        this.actualidad = actualidad;
     }
 
     static getFieldsForm(item?: Experiencia): FieldsForm[]{
@@ -24,10 +28,22 @@ export class Experiencia{
                   value: item.tituloExperiencia
                 }
                 ,  {
-                  nombre: "fechaExperiencia",
+                  nombre: "anioInicio",
                   type: "number",
-                  label: "Fecha de la experiencia",
-                  value: item.fechaExperiencia
+                  label: "Año de inicio de la actividad",
+                  value: item.anioInicio
+                }
+                ,  {
+                  nombre: "anioFin",
+                  type: "number",
+                  label: "Año de finalización de la actividad",
+                  value: item.anioFin
+                }
+                ,  {
+                  nombre: "actualidad",
+                  type: "checkbox",
+                  label: "En la actualidad",
+                  value: item.actualidad
                 }
                 , {
                   nombre:"descripcionExperiencia",
@@ -42,19 +58,31 @@ export class Experiencia{
                   nombre:"tituloExperiencia",
                   type: "text",
                   label: "Título de la experiencia",
-                  value: " "
+                  value: ""
                 }
                 ,  {
-                  nombre: "fechaExperiencia",
+                  nombre: "anioInicio",
                   type: "number",
-                  label: "Feha de la experiencia",
+                  label: "Año de inicio de la actividad",
                   value: null
+                }
+                ,  {
+                  nombre: "anioFin",
+                  type: "number",
+                  label: "Año de finalización de la actividad",
+                  value: ""
+                }
+                ,  {
+                  nombre: "actualidad",
+                  type: "checkbox",
+                  label: "En la actualidad",
+                  value: false
                 }
                 , {
                   nombre:"descripcionExperiencia",
                   type: "text",
                   label: "Descripción",
-                  value: " "
+                  value: ""
                 }
               ]   
         }

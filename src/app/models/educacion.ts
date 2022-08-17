@@ -3,14 +3,16 @@ import { FieldsForm } from "./fieldsForm";
 export class Educacion {
     id_Edu: number;
     tituloEdu: string;
-    fechaEdu: number;
+    anioInicio: number = new Date().getFullYear();
     descripcionEdu: string;
+    estado: string;
 
-    constructor(id_Edu: number, tituloEdu: string, fechaEdu: number, descripcionEdu: string){
+    constructor(id_Edu: number, tituloEdu: string, anioInicio: number, descripcionEdu: string, estado: string){
         this.id_Edu = id_Edu;
         this.tituloEdu = tituloEdu;
-        this.fechaEdu = fechaEdu;
+        this.anioInicio = anioInicio;
         this.descripcionEdu = descripcionEdu;
+        this.estado = estado;
     }
 
     static getFieldsForm(item?: Educacion): FieldsForm[]{
@@ -24,16 +26,22 @@ export class Educacion {
                   value: item.tituloEdu
                 }
                 ,  {
-                  nombre: "fechaEdu",
+                  nombre: "anioInicio",
                   type: "number",
-                  label: "Fecha de la educación",
-                  value: item.fechaEdu
+                  label: "Fecha de inicio",
+                  value: item.anioInicio
                 }
                 , {
                   nombre:"descripcionEdu",
                   type: "text",
                   label: "Descripción",
                   value: item.descripcionEdu
+                }
+                , {
+                  nombre:"estado",
+                  type: "text",
+                  label: "Estado",
+                  value: item.estado
                 }
               ]   
         } else{
@@ -42,19 +50,25 @@ export class Educacion {
                   nombre:"tituloEdu",
                   type: "text",
                   label: "Título de educación",
-                  value: " "
+                  value: ""
                 }
                 ,  {
-                  nombre: "fechaEdu",
+                  nombre: "anioInicio",
                   type: "number",
-                  label: "Fecha de la educación",
+                  label: "Fecha de inicio",
                   value: null
                 }
                 , {
                   nombre:"descripcionEdu",
                   type: "text",
                   label: "Descripción",
-                  value: " "
+                  value: ""
+                }
+                , {
+                  nombre:"estado",
+                  type: "text",
+                  label: "Estado",
+                  value: ""
                 }
               ]   
         }

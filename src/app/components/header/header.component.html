@@ -1,33 +1,30 @@
 <app-navbar></app-navbar>
 
-<div class="container-header p-0">
-  <div class="d-flex container-fluid justify-content-center p-0">
-    <!-- <img src="https://drive.google.com/uc?export=view&id=1_OsIvEcZ1tJ5CcObSY1t4R6Ie1dVu9dz" class="img-fluid portada" alt="banner"> -->
-    <img
-      src="{{ usuario.urlBanner }}"
-      onerror="this.src='https://drive.google.com/uc?export=view&id=1_OsIvEcZ1tJ5CcObSY1t4R6Ie1dVu9dz'"
-      class="img-fluid portada"
-      alt="banner"
-    />
-  </div>
-  <div class="d-flex flex-wrap container-perfil p-2">
-    <div class="d-flex img-perfil">
-      <img src="{{usuario.urlFoto}}" onerror="this.src='https://drive.google.com/uc?export=view&id=1uI-c2_8KAGPx9-BBdRUQzaCVhPVoMm9p'"
-      class="foto-perfil rounded-circle img-fluid" alt="img-perfil">
+<section>
+  <div class="container-header p-0">
+    <div class="d-flex container-fluid justify-content-center p-0">
+      <img src="{{usuario.urlBanner}}"
+        onerror="this.src='https://drive.google.com/uc?export=view&id=1_OsIvEcZ1tJ5CcObSY1t4R6Ie1dVu9dz'"
+        class="img-fluid portada" alt="banner">
     </div>
-    <div class="d-flex container-presentacion">
-      <div class="d-flex flex-column"> 
-        <div class="d-flex flex-wrap"> 
-          <h1>{{usuario.nombre}} {{usuario.apellido}}</h1>
-        <app-buttons
-            [title]="'Edit'"
-            (click)="editar(usuario)">
-          </app-buttons>
-        </div>
-        
-          <h3> {{usuario.descripcion}} </h3>
+    <div class="d-flex container container-perfil p-2">
+      <div class="d-flex img-perfil">
+        <img src="{{usuario.urlFoto}}"
+          onerror="this.src='https://drive.google.com/uc?export=view&id=1QUBkdzBcg7e4EJZn14S7-LqiXfgv9jLv'"
+          class="foto-perfil rounded-circle img-fluid" alt="img-perfil">
       </div>
-      
+      <div class="d-flex container-presentacion">
+        <div class="d-flex flex-column ">
+          <h1>{{usuario.nombre}} {{usuario.apellido}}</h1>
+          <div class="d-flex  justify-content-center align-items-center descripcion">
+            <h3> {{usuario.descripcion}} </h3>
+            <app-buttons [title]="'Edit'" (click)="editar(usuario)">
+            </app-buttons>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
+</section>

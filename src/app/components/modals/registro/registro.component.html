@@ -1,0 +1,38 @@
+<!-- Modal -->
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Registro
+        </h5>
+        <button type="button" class="btn-close" (click)="activeModal.close(false)" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registroForm" (ngSubmit)="registro(registroForm.value)">
+          <div class="mb-3">
+            <label class="col-form-label" for="nombre">Nombre</label>
+            <input type=user id="nombre" class="form-control" formControlName="nombre">
+
+            <label class="col-form-label" for="nombre">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+
+            <label class="col-form-label" for="nombreUsuario">Nombre de Usuario</label>
+            <input type=user id="nombreUsuario" class="form-control" formControlName="nombreUsuario">
+  
+            <label class="col-form-label" for="password">Contraseña</label>
+            <input type=password id="password" class="form-control" formControlName="password" required>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid" >
+              Crear Usuario
+            </button>
+          </div>
+  
+  
+        </form>
+  
+      </div>
+    </div>
+  </div>

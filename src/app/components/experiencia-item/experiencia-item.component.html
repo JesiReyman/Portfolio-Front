@@ -1,7 +1,7 @@
-<div class="container my-2">
+<div class="container-fluid p-0 my-2">
     <div class="card"> 
       <div class="card-header d-flex">
-         <h5>{{experienciaItem.tituloExperiencia}} </h5> 
+         <h3>{{experienciaItem.tituloExperiencia}} </h3> 
   
         <div class="ms-auto">
           <app-buttons
@@ -19,8 +19,13 @@
       </div>
       
       <div class="card-body">
-        <h5 class="card-title">{{experienciaItem.fechaExperiencia}}</h5>
-        <p class="card-text">{{experienciaItem.descripcionExperiencia}}</p>
+        <div class="card-title">
+          <h5 *ngIf="!experienciaItem.actualidad">{{experienciaItem.anioInicio}} - {{experienciaItem.anioFin}}</h5>
+           
+          <h5 *ngIf="experienciaItem.actualidad">{{experienciaItem.anioInicio}} - En la actualidad</h5> 
+        </div>
+        <p class="card-text">{{experienciaItem.descripcionExperiencia}} - </p>
+        
       </div>
     </div>
   </div>

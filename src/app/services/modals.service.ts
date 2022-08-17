@@ -4,22 +4,23 @@ import { Subject } from 'rxjs';
 import { ModalDeleteComponent } from '../components/modals/modal-delete/modal-delete.component';
 import { AddModalComponent } from '../components/modals/add-modal/add-modal.component';
 import { FieldsForm } from '../models/fieldsForm';
-import { LoginModalComponent } from '../components/modals/login-modal/login-modal.component'
+import { LoginModalComponent } from '../components/modals/login-modal/login-modal.component';
 import { AuthService } from './auth.service';
 import { LoginUsuario } from '../models/login-usuario';
 import { TokenService } from './token.service';
 import { JwtDto } from '../models/jwt-dto';
 import { Router } from '@angular/router';
-
+import { RegistroComponent } from '../components/modals/registro/registro.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalsService {
-
   constructor(
-    private modalService: NgbModal, private tokenService: TokenService) {}
-    
+    private modalService: NgbModal,
+    private tokenService: TokenService
+  ) {}
+
   private _delete = new Subject<boolean>();
   delete$ = this._delete.asObservable();
 
@@ -30,7 +31,6 @@ export class ModalsService {
   nombre$ = this.nombreDeUsuario.asObservable();
 
   openDeleteModal(titulo: string, nombreItem: string): void {
-    
     const modalRef = this.modalService.open(ModalDeleteComponent);
     modalRef.componentInstance.nombreItem = nombreItem;
     modalRef.componentInstance.titulo = titulo;
@@ -44,7 +44,6 @@ export class ModalsService {
       });
   }
 
- 
   openAddModal(formFields: FieldsForm[], titulo: string) {
     const modalRef = this.modalService.open(AddModalComponent);
     modalRef.componentInstance.formFields = formFields;
@@ -62,29 +61,23 @@ export class ModalsService {
       });
   }
 
-
   openLoginModal(): void {
     console.log('esto abre el login modal');
     const modalRef = this.modalService.open(LoginModalComponent);
-    
-    modalRef.result.then((result)=> {
-      //let logged
-      //console.log("esto se imprime cuando llega al servicio: " + result);
-      //if(Array.isArray(result)){
-      //  console.log("este es el primer elemento del array: " + result[0])
-      //  logged = result[0];
-       // this.loginData.next(result);
-     // } else {
-      console.log("al servicio llego el siguiente nombre de usuario: " + result);
-      this.nombreDeUsuario.next(result);
-      
-      //  logged = result;
-     // }
-      //this.isLogged.next(logged);
-      console.log("llamo al metodo isLogged")
-      this.tokenService.isLogged();
-    })
-    
-  } 
 
+    modalRef.result.then((result) => {
+      console.log(
+        'al servicio llego el siguiente nombre de usuario: ' + result
+      );
+      this.nombreDeUsuario.next(result);
+
+      console.log('llamo al metodo isLogged');
+      this.tokenService.isLogged();
+    });
+  }
+
+  openRegistro(){
+     this.modalService.open(RegistroComponent, { windowClass: 'dark-modal' });
+    
+  }
 }

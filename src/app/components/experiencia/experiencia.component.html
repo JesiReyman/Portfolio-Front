@@ -1,18 +1,17 @@
-<div class="d-flex flex-column container seccion"> 
-   <div class="d-flex container align-items-center"> 
-      <h1>Experiencias</h1>
-      <div>
-           <app-buttons
-              [title]="'Add'"
-              (click)="openAddModal()">
-           </app-buttons>
+<section>
+   <div class="d-flex flex-column container-fluid mx-0 seccion">
+      <div class="d-flex container align-items-center">
+         <h1>Experiencias</h1>
+         <div>
+            <app-buttons [title]="'Add'" (click)="openAddModal()">
+            </app-buttons>
+         </div>
+      </div>
+      <div class="container">
+         <app-experiencia-item *ngFor="let experiencia of listaExperiencia" [experienciaItem]="experiencia"
+            (aceptoBorrar)="borrar($event)" (editarExperiencia)="editar($event)">
+         </app-experiencia-item>
       </div>
    </div>
-  <app-experiencia-item
-     *ngFor="let experiencia of listaExperiencia"
-     [experienciaItem]="experiencia"
-     (aceptoBorrar)="borrar($event)"
-     (editarExperiencia)="editar($event)">
-  </app-experiencia-item>
-</div>
+</section>
 

@@ -4,24 +4,41 @@
 
 .portada {
   width: 100%;
-  max-height: 37.5rem;
+  max-height: 40vh;
 }
 
 .img-perfil {
+  border-radius:50%;
   max-width: 40%;
   max-height: 20%;
-}
-
-.container-perfil {
-  margin-top: -15%;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-left: 5%;
-  margin-right: 5%;
+  border: 1px solid black;
   
 }
 
+.container-perfil {
+  width: 80%;
+  margin-top: -8%;
+  align-items: center;
+  align-self: center;
+  justify-content: space-evenly;
+  
+}
+
+h3{
+  margin-bottom: 0;
+}
+
 .container-presentacion {
-  margin-top: 15%;
+  margin-top: 8%;
   text-align: center;
+  
+}
+
+@media only screen and (max-width: 800px) {
+  .container-perfil{
+    flex-direction:column;
+  }
+  .container-presentacion{
+    margin-top: 2%;
+  }
 }

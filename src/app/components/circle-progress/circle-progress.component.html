@@ -1,5 +1,6 @@
 <circle-progress
-    [percent]="nivel"
+    [title]="skill.nombreSkill"
+    [percent]="skill.nivelSkill"
     [radius]="100"
     [outerStrokeWidth]="16"
     [innerStrokeWidth]="8"
@@ -7,6 +8,9 @@
     [innerStrokeColor]="'#C7E596'"
     [animation]="true"
     [animationDuration]="300"
+    [showUnits]="false"
+    [showSubtitle]="true"
+    [subtitle]="skill.nivelSkill + '%'"
     [lazy]="true">
     
 </circle-progress>

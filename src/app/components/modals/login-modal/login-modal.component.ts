@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { LoginUsuario } from 'src/app/models/login-usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalsService } from 'src/app/services/modals.service';
 import { TokenService } from 'src/app/services/token.service';
 
 
@@ -15,12 +16,13 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./login-modal.component.css'],
 })
 export class LoginModalComponent implements OnInit {
-  loginForm: UntypedFormGroup = {} as UntypedFormGroup;
+  loginForm: FormGroup = {} as FormGroup;
  // isLogged: boolean = false;
  // isAdmin: boolean = false;
 
   constructor(
     public activeModal: NgbActiveModal,
+    private modalsService: ModalsService,
     private authService: AuthService,
     private tokenService: TokenService
   ) {}
@@ -62,6 +64,9 @@ export class LoginModalComponent implements OnInit {
    
   }
 
+  openModalDeRegistro(){
+    this.modalsService.openRegistro();
+  }
   /*
   isLogged(): boolean{
     if(this.tokenService.getToken()){

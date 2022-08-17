@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Skill } from 'src/app/models/skill';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CircleProgressComponent implements OnInit {
 
-  @Input() nivel: number = 0;
+  @Input() skill: Skill = {} as Skill;
 
   constructor() { }
 
