@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+    <div class="ms-auto">
+
+        <app-buttons [title]="'Edit'" (click)="openEditModal(proyectoItem)">
+        </app-buttons>
+
+        <app-buttons [title]="'Delete'" (click)="openDeleteModal(proyectoItem)">
+        </app-buttons>
+
+    </div>
+
+    <img src="{{proyectoItem.urlImagen}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{proyectoItem.titulo}}</h5>
+      <p class="card-text"> {{proyectoItem.descripcion}} </p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>

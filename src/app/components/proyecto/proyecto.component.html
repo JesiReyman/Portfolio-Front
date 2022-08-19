@@ -1,0 +1,17 @@
+<section>
+    <div class="d-flex flex-column container-fluid mx-0 seccion">
+        <div class="d-flex container align-items-center">
+            <h1>Proyectos</h1>
+
+            <app-buttons [title]="'Add'" (click)="openAddModal()">
+            </app-buttons>
+
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-evenly">
+            <app-proyecto-item *ngFor="let proyecto of listaProyecto" [proyectoItem]="proyecto"
+                (aceptoBorrar)="borrar($event)" (editarProyecto)="editar($event)">
+            </app-proyecto-item>
+        </div>
+    </div>
+</section>

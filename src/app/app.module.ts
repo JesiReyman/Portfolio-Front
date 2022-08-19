@@ -26,6 +26,8 @@ import { HomeComponent } from './components/home/home.component';
 import { InterceptorService } from './services/interceptor.service';
 import { RegistroComponent } from './components/modals/registro/registro.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { ProyectoItemComponent } from './components/proyecto-item/proyecto-item.component';
 
 
 
@@ -47,7 +49,9 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginModalComponent,
     HomeComponent,
     RegistroComponent,
-    FooterComponent
+    FooterComponent,
+    ProyectoComponent,
+    ProyectoItemComponent
   ],
   imports: [
     BrowserModule,
