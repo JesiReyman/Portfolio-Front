@@ -1,6 +1,6 @@
 <div class="container my-2" cdkDrag>
-  <div class="card" style="max-width: 18rem;">
-    <div class="card-header d-flex" >
+  <div class="card " style="max-width: 18rem;">
+    <div class="card-header text-white bg-dark d-flex" >
      <!-- <h5>{{skillItem.nombreSkill}} </h5> -->
       <div cdkDragHandle><i class="fa-solid fa-grip"></i> </div>
 
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="card-body">
+    <div class="card-body bg-light">
      <!-- <h5 class="card-title">Nivel del Skill</h5>
       <p class="card-text">{{skillItem.nivelSkill}}</p> -->
       <app-circle-progress [skill]="skillItem">

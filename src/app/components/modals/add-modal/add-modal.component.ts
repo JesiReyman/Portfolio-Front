@@ -35,7 +35,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
 
     console.log(this.formulario);
 
-    /*
+    
     this.formulario.get('actualidad')?.valueChanges
       .subscribe({
         next: (value) => {
@@ -46,7 +46,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
             this.formulario.get('anioFin')?.enable();
           }
         }
-      })*/
+      })
 
   }
 

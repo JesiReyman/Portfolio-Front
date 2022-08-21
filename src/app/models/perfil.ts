@@ -7,6 +7,9 @@ export class Perfil {
   descripcion: string;
   urlBanner: string;
   urlFoto: string;
+  urlGitHub: string;
+  urlLinkedIn: string;
+
 
   constructor(
     id: number,
@@ -14,7 +17,9 @@ export class Perfil {
     apellido: string,
     descripcion: string,
     urlBanner: string,
-    urlFoto: string
+    urlFoto: string,
+    urlGitHub: string,
+    urlLinkedIn: string,
   ) {
     this.id = id;
     this.nombre = nombre;
@@ -22,6 +27,8 @@ export class Perfil {
     this.descripcion = descripcion;
     this.urlBanner = urlBanner;
     this.urlFoto = urlFoto;
+    this.urlGitHub = urlGitHub;
+    this.urlLinkedIn = urlLinkedIn;
   }
 
   static getFieldsForm(item?: Perfil): FieldsForm[] {
@@ -58,6 +65,18 @@ export class Perfil {
           label: 'URL de imagen de perfil',
           value: item.urlFoto,
         },
+        {
+          nombre: 'urlGitHub',
+          type: 'text',
+          label: 'Enlace a GitHub',
+          value: item.urlGitHub,
+        },
+        {
+          nombre: 'urlLinkedIn',
+          type: 'text',
+          label: 'Enlace a LinkedIn',
+          value: item.urlLinkedIn,
+        },
       ];
     } else {
       formFields = [
@@ -89,6 +108,18 @@ export class Perfil {
           nombre: 'urlFoto',
           type: 'text',
           label: 'URL de imagen de perfil',
+          value: '',
+        },
+        {
+          nombre: 'urlGitHub',
+          type: 'text',
+          label: 'Enlace a GitHub',
+          value: '',
+        },
+        {
+          nombre: 'urlLinkedIn',
+          type: 'text',
+          label: 'Enlace a LinkedIn',
           value: '',
         },
       ];

@@ -1,9 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-   /* background-color: #231253 !important;*/
-    /*color: white;*/
+   /* background-color: #363538;*/
+   /* color: white;*/
 }
 
 section{
     margin-bottom: 2%;
 }
+
+.titulo-seccion{
+   /* background-color: rgb(58, 58, 112);
+    color: white;*/
+}
+
+/*
+.card{
+    background-color: black;
+    color: white;
+}*/

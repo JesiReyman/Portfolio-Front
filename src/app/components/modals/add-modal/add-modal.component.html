@@ -15,7 +15,7 @@
           [formGroup]="formulario" (ngSubmit)="onFormSubmit(formulario.value)"
         >
           <div class="mb-3" *ngFor="let prop of formFields">
-            <label class="col-form-label" >{{prop.label}}</label>
+            <label class="col-form-label">{{prop.label}}</label>
 
             <input *ngIf="!tieneDescripcion(prop.nombre) && !prop.nombre.includes('estado') && !prop.nombre.includes('actualidad')"
               type={{prop.type}} 
@@ -53,12 +53,12 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" 
               (click)="activeModal.close(false)">
-              Close
+              Cancelar
             </button>
             <button type="submit" class="btn btn-primary" 
               [disabled]="formulario.invalid" 
               (click)="activeModal.close(formulario.value)">
-              Send message
+              Guardar
             </button>
           </div>
         

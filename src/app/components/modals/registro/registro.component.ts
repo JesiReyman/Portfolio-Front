@@ -17,14 +17,13 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.registroForm = new FormGroup({
       nombre: new FormControl(),
-      email: new FormControl(),
-      nombreUsuario: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
+      email: new FormControl('', [Validators.email]),
+      nombreUsuario: new FormControl('', [Validators.required, Validators.minLength(6)]),
       password: new FormControl(),
     });
   }
+
+  get nombreUsuario() { return this.registroForm.get('nombreUsuario'); }
 
   registro(datos: NuevoUsuario){
     this.authService.nuevo(datos).subscribe({

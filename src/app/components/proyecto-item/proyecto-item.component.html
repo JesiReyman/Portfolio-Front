@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<div class="card text-white bg-dark my-2" style="width: 20rem;">
     <div class="ms-auto">
 
         <app-buttons [title]="'Edit'" (click)="openEditModal(proyectoItem)">
@@ -9,10 +9,10 @@
 
     </div>
 
-    <img src="{{proyectoItem.urlImagen}}" class="card-img-top" alt="...">
-    <div class="card-body">
+    <img src="{{proyectoItem.urlImagen}}" onerror="this.src='https://drive.google.com/uc?export=view&id=1col89snMOOZkQ3bEbY4qxxnRlS3KNh3k'" class="card-img-top" alt="...">
+    <div class="card-body text-center">
       <h5 class="card-title">{{proyectoItem.titulo}}</h5>
       <p class="card-text"> {{proyectoItem.descripcion}} </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <a href="#" class="btn btn-primary ms-auto"><i class="fa-solid fa-up-right-from-square"></i></a>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { ModalsService } from 'src/app/services/modals.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -12,6 +12,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class NavbarComponent implements OnInit {
   isLogged = false;
   subscription?: Subscription;
+  @Input() enlaceGithub: string = "";
+  @Input() enlaceLinkedin: string = "";
 
   constructor(
     private modalsService: ModalsService,

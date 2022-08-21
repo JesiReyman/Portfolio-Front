@@ -18,10 +18,14 @@
           <input type=password id="password" class="form-control" formControlName="password" required>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" (click)="openModalDeRegistro()">
-            Regístrate!
-          </button>
+        <div class="d-flex modal-footer">
+          <div class="d-flex me-auto align-items-center">
+            <div>No tenes cuenta?</div>
+            <button type="button" class="btn btn-success mx-1" (click)="openModalDeRegistro()">
+              Regístrate!
+            </button>
+          </div>
+          
           <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" >
             Ingresar
           </button>
