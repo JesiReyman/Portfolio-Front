@@ -12,6 +12,7 @@ import { NuevoUsuario } from '../models/nuevo-usuario';
 export class AuthService {
 
   authUrl = "http://localhost:8080/auth"; 
+  //private authUrl = "https://apibackportfolio.herokuapp.com/auth"; 
 
   constructor(private http: HttpClient) { }
 

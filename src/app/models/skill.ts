@@ -19,13 +19,15 @@ export class Skill {
            nombre:"nombreSkill",
            type: "text",
            label: "Nombre de skill",
-           value: item.nombreSkill
+           value: item.nombreSkill,
+           required: true
             }
             ,{
            nombre: "nivelSkill",
            type: "number",
            label: "Nivel de skill",
-           value: item.nivelSkill
+           value: item.nivelSkill,
+           required: true
             }
             ] 
         } else {
@@ -34,13 +36,15 @@ export class Skill {
           nombre:"nombreSkill",
           type: "text",
           label: "Nombre de skill",
-          value: " "
+          value: "",
+          required: true
             }
             ,  {
           nombre: "nivelSkill",
           type: "number",
           label: "Nivel de skill",
-          value: 0
+          value: 0,
+          required: true
             }
             ]  
         }

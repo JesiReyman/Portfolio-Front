@@ -10,6 +10,7 @@ import { Educacion } from '../models/educacion';
 export class EducationService {
 
   private educacionServerUrl = "http://localhost:8080/educacion";
+  //private educacionServerUrl = "https://apibackportfolio.herokuapp.com/educacion";
 
   constructor(private http: HttpClient) { }
 

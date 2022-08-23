@@ -1,5 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FieldsForm } from 'src/app/models/fieldsForm';
 
@@ -14,6 +14,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
   @Input() titulo: string = "";
   formulario: FormGroup = {} as FormGroup;
   estado: string[] = [];
+  //field: FieldsForm = {} as FieldsForm;
       
   group: any = {};
              
@@ -25,8 +26,8 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
     console.log("Llego al modal los campos para el formulario: " + JSON.stringify(this.formFields))
     this.estado = ["Finalizado", "En Curso", "Incompleto"];
 
-    this.formFields.forEach((question: { nombre: string; value: string | number | null | Date | boolean; }) => {
-      this.group[question.nombre] =  new FormControl(question.value);
+    this.formFields.forEach((question: { nombre: string; value: string | number | null | Date | boolean; required: boolean}) => {
+      this.group[question.nombre] = question.required ? new FormControl(question.value, Validators.required) : new FormControl(question.value) ;
       console.log(question.nombre);
       console.log(question.nombre.includes('descripcion'));
     });
@@ -72,6 +73,8 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
     }
 
   }
+
+  isValid(nombreDelCampo: string) { return this.formulario.controls[nombreDelCampo].valid; }
 
   onFormSubmit(formulario: any){
     console.log("esttos son los valores del formulario: " + JSON.stringify(formulario))

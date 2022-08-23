@@ -12,6 +12,7 @@ import { Perfil } from '../models/perfil';
 //Pongo la url que defini en environment, que es la que usamos para trabajar con la base
 export class HeaderService {
   private usuarioServerUrl = "http://localhost:8080/perfil";
+  //private usuarioServerUrl = "https://apibackportfolio.herokuapp.com/perfil";
 
   constructor(private http: HttpClient) { }
 

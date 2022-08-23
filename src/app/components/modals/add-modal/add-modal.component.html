@@ -22,7 +22,6 @@
               class="form-control" 
               formControlName={{prop.nombre}} 
               value={{prop.value}}
-              required
             >
             
             <div class="form-group" *ngIf="prop.nombre.includes('actualidad')">
@@ -32,7 +31,7 @@
               [formControlName]="prop.nombre" 
               [checked]="prop.value"
               (change)="onCheckboxValueChange($event)"
-               >
+             >
             </div>
 
               
@@ -41,12 +40,21 @@
               class="form-control" 
               formControlName={{prop.nombre}}
               value={{prop.value}} 
-              required>
+              >
             </textarea>
 
             <select class="form-control" *ngIf="prop.nombre.includes('estado')" formControlName={{prop.nombre}}>
               <option *ngFor="let opt of estado" value={{opt}}>{{opt}}</option>
             </select>
+
+            <div
+              *ngIf="formulario.controls[prop.nombre].invalid && (formulario.controls[prop.nombre].dirty || formulario.controls[prop.nombre].touched)"
+              class="alert alert-danger">
+            
+              <div *ngIf="formulario.controls[prop.nombre].errors?.['required']">
+                {{prop.label}} es requerido.
+              </div>
+            </div>
 
           </div>
 

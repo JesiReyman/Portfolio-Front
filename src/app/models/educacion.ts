@@ -23,25 +23,29 @@ export class Educacion {
                   nombre:"tituloEdu",
                   type: "text",
                   label: "Título de educación",
-                  value: item.tituloEdu
+                  value: item.tituloEdu,
+                  required: true
                 }
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
                   label: "Fecha de inicio",
-                  value: item.anioInicio
+                  value: item.anioInicio,
+                  required: true
                 }
                 , {
                   nombre:"descripcionEdu",
                   type: "text",
                   label: "Descripción",
-                  value: item.descripcionEdu
+                  value: item.descripcionEdu,
+                  required: true
                 }
                 , {
                   nombre:"estado",
                   type: "text",
                   label: "Estado",
-                  value: item.estado
+                  value: item.estado,
+                  required: true
                 }
               ]   
         } else{
@@ -50,25 +54,29 @@ export class Educacion {
                   nombre:"tituloEdu",
                   type: "text",
                   label: "Título de educación",
-                  value: ""
+                  value: "",
+                  required: true
                 }
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
                   label: "Fecha de inicio",
-                  value: null
+                  value: null,
+                  required: true
                 }
                 , {
                   nombre:"descripcionEdu",
                   type: "text",
                   label: "Descripción",
-                  value: ""
+                  value: "",
+                  required: true
                 }
                 , {
                   nombre:"estado",
                   type: "text",
                   label: "Estado",
-                  value: ""
+                  value: "",
+                  required: true
                 }
               ]   
         }

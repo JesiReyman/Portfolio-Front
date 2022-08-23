@@ -10,6 +10,7 @@ import { Experiencia } from '../models/experiencia';
 export class ExperienciaService {
 
   private experienciaServerUrl = "http://localhost:8080/experiencia";
+  //private experienciaServerUrl = "https://apibackportfolio.herokuapp.com/experiencia";
 
   constructor(private http: HttpClient) { }
 

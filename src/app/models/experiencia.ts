@@ -25,31 +25,36 @@ export class Experiencia{
                   nombre:"tituloExperiencia",
                   type: "text",
                   label: "Título de la experiencia",
-                  value: item.tituloExperiencia
+                  value: item.tituloExperiencia,
+                  required: true
                 }
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
                   label: "Año de inicio de la actividad",
-                  value: item.anioInicio
+                  value: item.anioInicio,
+                  required: true
                 }
                 ,  {
                   nombre: "anioFin",
                   type: "number",
                   label: "Año de finalización de la actividad",
-                  value: item.anioFin
+                  value: item.anioFin,
+                  required: false
                 }
                 ,  {
                   nombre: "actualidad",
                   type: "checkbox",
                   label: "En la actualidad",
-                  value: item.actualidad
+                  value: item.actualidad,
+                  required: false
                 }
                 , {
                   nombre:"descripcionExperiencia",
                   type: "text",
                   label: "Descripción",
-                  value: item.descripcionExperiencia
+                  value: item.descripcionExperiencia,
+                  required: true
                 }
               ]   
         } else{
@@ -58,31 +63,37 @@ export class Experiencia{
                   nombre:"tituloExperiencia",
                   type: "text",
                   label: "Título de la experiencia",
-                  value: ""
+                  value: "",
+                  required: true
+
                 }
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
                   label: "Año de inicio de la actividad",
-                  value: null
+                  value: null,
+                  required: true
                 }
                 ,  {
                   nombre: "anioFin",
                   type: "number",
                   label: "Año de finalización de la actividad",
-                  value: ""
+                  value: "",
+                  required: false
                 }
                 ,  {
                   nombre: "actualidad",
                   type: "checkbox",
                   label: "En la actualidad",
-                  value: false
+                  value: false,
+                  required: false
                 }
                 , {
                   nombre:"descripcionExperiencia",
                   type: "text",
                   label: "Descripción",
-                  value: ""
+                  value: "",
+                  required: true
                 }
               ]   
         }
