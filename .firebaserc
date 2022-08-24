@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "portfolio-9dcf2"
+  },
+  "targets": {
+    "portfolio-9dcf2": {
+      "hosting": {
+        "PruebaFront": [
+          "portfolio-9dcf2"
+        ]
+      }
+    }
   }
 }

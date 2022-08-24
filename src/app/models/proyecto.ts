@@ -53,6 +53,13 @@ export class Proyecto {
           value: item.urlProyecto,
           required: false
         },
+        {
+          nombre: 'imagen',
+          type: 'file',
+          label: 'Imagen',
+          value: '',
+          required: false
+        }
       ];
     } else {
       formFields = [
@@ -84,6 +91,13 @@ export class Proyecto {
           value: '',
           required: false
         },
+        {
+          nombre: 'imagen',
+          type: 'file',
+          label: 'Imagen',
+          value: '',
+          required: false
+        }
       ];
     }
 

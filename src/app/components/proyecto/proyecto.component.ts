@@ -4,6 +4,7 @@ import { Proyecto } from 'src/app/models/proyecto';
 import { ModalsService } from 'src/app/services/modals.service';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { take } from 'rxjs';
+import { ImagenService } from 'src/app/services/imagen.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -15,7 +16,7 @@ export class ProyectoComponent implements OnInit {
   listaProyecto: Proyecto[] = [];
   @Input() nombreUsuario: string = "";
 
-  constructor(private proyectoService: ProyectoService, private modalsService: ModalsService) { }
+  constructor(private proyectoService: ProyectoService, private modalsService: ModalsService, private imagen: ImagenService) { }
 
   ngOnInit(): void {
     this.getProyectoList(this.nombreUsuario);
@@ -47,21 +48,49 @@ export class ProyectoComponent implements OnInit {
   openAddModal() {
     let titulo = 'Agregar proyecto: ';
     let campos = Proyecto.getFieldsForm();
-    this.modalsService.openAddModal(campos, titulo);
+    let imagenFile = File;
+    
 
+    this.modalsService.openAddModal(campos, titulo);
+    this.imagen.fileData$.subscribe( (result) => {
+      imagenFile = result;
+      console.log(imagenFile)
+    });
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
+      
       if (result) {
         result['proyectoId'] = 0;
-        console.log('esto llego para agregarse: ' + JSON.stringify(result));
+       // console.log('esto llego a proyecto para agregarse: ' + JSON.stringify(result));
+       // console.log('finalmente cuando hago un submit en proyecto queda la siguiente imagen');
+       // console.log(imagenFile);
+        this.imagen.subirImagen(imagenFile, this.nombreUsuario)
+        this.imagen.url$.pipe(take(1)).subscribe((respuesta) => {
+          console.log('esto es lo que le llego a proyecto: ' + respuesta);
+          result['urlImagen'] = respuesta;
+          delete result['imagen']
+          console.log("finalmente el proyecto a agregar queda: " + JSON.stringify(result))
 
-        this.proyectoService.addProyecto(result, this.nombreUsuario).subscribe({
+          this.proyectoService.addProyecto(result, this.nombreUsuario).subscribe({
+            next: () => {
+              this.getProyectoList(this.nombreUsuario);
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            },
+          });
+
+        });
+        //console.log(urlImagen)
+        
+
+       /* this.proyectoService.addProyecto(result, this.nombreUsuario).subscribe({
           next: () => {
             this.getProyectoList(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
             alert(error.message);
           },
-        });
+        });*/
       }
     });
   }

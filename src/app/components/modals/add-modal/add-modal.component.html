@@ -12,12 +12,12 @@
       </div>
       <div class="modal-body">
         <form
-          [formGroup]="formulario" (ngSubmit)="onFormSubmit(formulario.value)"
+          [formGroup]="formulario" 
         >
           <div class="mb-3" *ngFor="let prop of formFields">
             <label class="col-form-label">{{prop.label}}</label>
 
-            <input *ngIf="!tieneDescripcion(prop.nombre) && !prop.nombre.includes('estado') && !prop.nombre.includes('actualidad')"
+            <input *ngIf="!tieneDescripcion(prop.nombre) && !prop.nombre.includes('estado') && !prop.nombre.includes('actualidad') && !prop.nombre.includes('imagen')"
               type={{prop.type}} 
               class="form-control" 
               formControlName={{prop.nombre}} 
@@ -46,6 +46,11 @@
             <select class="form-control" *ngIf="prop.nombre.includes('estado')" formControlName={{prop.nombre}}>
               <option *ngFor="let opt of estado" value={{opt}}>{{opt}}</option>
             </select>
+
+            <div class="mb-3" *ngIf="prop.nombre.includes('imagen')">
+              <label class="form-label">Default file input example</label>
+              <input class="form-control" type="file" formControlName={{prop.nombre}} (change)="subirArchivo($event)">
+            </div>
 
             <div
               *ngIf="formulario.controls[prop.nombre].invalid && (formulario.controls[prop.nombre].dirty || formulario.controls[prop.nombre].touched)"

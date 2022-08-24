@@ -28,6 +28,9 @@ import { RegistroComponent } from './components/modals/registro/registro.compone
 import { FooterComponent } from './components/footer/footer.component';
 import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { ProyectoItemComponent } from './components/proyecto-item/proyecto-item.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
 
@@ -62,7 +65,9 @@ import { ProyectoItemComponent } from './components/proyecto-item/proyecto-item.
     NgbModule,
     DialogModule,
     DragDropModule,
-    NgCircleProgressModule.forRoot({})
+    NgCircleProgressModule.forRoot({}),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [
     {
