@@ -23,7 +23,7 @@ export class ProyectoItemComponent implements OnInit {
   }
 
   openDeleteModal(item: Proyecto){
-    console.log("abro el modal para eliminar: " + JSON.stringify(item))
+    //console.log("abro el modal para eliminar: " + JSON.stringify(item))
       let tituloBorrar = "Está por eliminar el siguiente Proyecto: ";
       this.servicioModal.openDeleteModal(tituloBorrar, item.titulo);
      
@@ -44,15 +44,8 @@ export class ProyectoItemComponent implements OnInit {
      let fields = Proyecto.getFieldsForm(item);
      let urlOriginal = item.urlImagen
      //let imagenFile = File;
-      console.log("voy a mandar lo siguiente al modal para editar: " + JSON.stringify(item))
+     // console.log("voy a mandar lo siguiente al modal para editar: " + JSON.stringify(item))
       this.servicioModal.openAddModal(fields, titulo);
-
-     /* this.imagen.fileData$.subscribe( (result) => {
-        imagenFile = result;
-        console.log("proyecto item recibio la imagen")
-        console.log(imagenFile)
-        this.imagen.subirImagen(imagenFile, this.nombreUsuario)
-      });*/
 
       this.servicioModal.resultado$
         .pipe(take(1))
@@ -63,7 +56,7 @@ export class ProyectoItemComponent implements OnInit {
                 let imagenFile = result.imageInput;
                 this.imagen.subirImagen(imagenFile, this.nombreUsuario);
 
-                if(urlOriginal !== ''){
+                if(urlOriginal !== '' && urlOriginal !== null){
                   this.imagen.deleteImage(urlOriginal);
                 }
               }

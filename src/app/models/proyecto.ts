@@ -40,13 +40,6 @@ export class Proyecto {
           required: true
         },
         {
-          nombre: 'urlImagen',
-          type: 'hidden',
-          label: '',
-          value: item.urlImagen,
-          required: false
-        },
-        {
           nombre: 'urlProyecto',
           type: 'text',
           label: 'URL del proyecto o repositorio del mismo',
@@ -56,7 +49,7 @@ export class Proyecto {
         {
           nombre: 'imagen',
           type: 'file',
-          label: 'Imagen',
+          label: 'Vista previa del proyecto',
           value: '',
           required: false
         },
@@ -85,13 +78,6 @@ export class Proyecto {
           required: true
         },
         {
-          nombre: 'urlImagen',
-          type: 'hidden',
-          label: '',
-          value: '',
-          required: false
-        },
-        {
           nombre: 'urlProyecto',
           type: 'text',
           label: 'URL del proyecto o repositorio del mismo',
@@ -101,7 +87,7 @@ export class Proyecto {
         {
           nombre: 'imagen',
           type: 'file',
-          label: 'Imagen',
+          label: 'Vista previa del proyecto',
           value: '',
           required: false
         },

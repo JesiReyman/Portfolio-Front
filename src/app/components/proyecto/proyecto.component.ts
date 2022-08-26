@@ -35,7 +35,7 @@ export class ProyectoComponent implements OnInit {
 
   borrar(item: Proyecto) {
     console.log('a proyecto component llega para borrar: ' + JSON.stringify(item) );
-    if(item.urlImagen !== ''){
+    if(item.urlImagen !== '' && item.urlImagen !== null){
       this.imagen.deleteImage(item.urlImagen);
       this.deleteProyecto(item, this.nombreUsuario);
     } else{
@@ -103,7 +103,7 @@ export class ProyectoComponent implements OnInit {
     console.log("a proyecto llega el siguiente proyecto editado" + JSON.stringify(item))
     if(item.imagen !== ''){
       this.imagen.url$.pipe(take(1)).subscribe((url) => {
-        item.urlImagen =  url;
+        item['urlImagen'] =  url;
        console.log(
          'el item editado queda: ' + JSON.stringify(item)
        );
