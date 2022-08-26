@@ -41,8 +41,8 @@ export class Proyecto {
         },
         {
           nombre: 'urlImagen',
-          type: 'text',
-          label: 'URL de la vista del proyecto',
+          type: 'hidden',
+          label: '',
           value: item.urlImagen,
           required: false
         },
@@ -57,6 +57,13 @@ export class Proyecto {
           nombre: 'imagen',
           type: 'file',
           label: 'Imagen',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imageInput',
+          type: 'hidden',
+          label: '',
           value: '',
           required: false
         }
@@ -79,8 +86,8 @@ export class Proyecto {
         },
         {
           nombre: 'urlImagen',
-          type: 'text',
-          label: 'URL de la vista del proyecto',
+          type: 'hidden',
+          label: '',
           value: '',
           required: false
         },
@@ -95,6 +102,13 @@ export class Proyecto {
           nombre: 'imagen',
           type: 'file',
           label: 'Imagen',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imageInput',
+          type: 'hidden',
+          label: '',
           value: '',
           required: false
         }

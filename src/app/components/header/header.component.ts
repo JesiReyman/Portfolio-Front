@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     this.headerService.getUser(nombreUsuario).subscribe({
       next: (response: Perfil) => {
         this.usuario = response;
-        console.log("el perfil cargado es el siguiente: " + JSON.stringify(this.usuario))
+        //console.log("el perfil cargado es el siguiente: " + JSON.stringify(this.usuario))
       },
       error:(error: HttpErrorResponse)=>{
         alert(error.message);

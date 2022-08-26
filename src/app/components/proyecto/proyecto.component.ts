@@ -33,11 +33,21 @@ export class ProyectoComponent implements OnInit {
     });
   }
 
-  borrar(id: number) {
-    console.log('a proyecto component llega para borrar: ' + id);
-    this.proyectoService.deleteProyecto(id, this.nombreUsuario).subscribe({
+  borrar(item: Proyecto) {
+    console.log('a proyecto component llega para borrar: ' + JSON.stringify(item) );
+    if(item.urlImagen !== ''){
+      this.imagen.deleteImage(item.urlImagen);
+      this.deleteProyecto(item, this.nombreUsuario);
+    } else{
+      this.deleteProyecto(item, this.nombreUsuario);
+    }
+    
+  }
+
+  deleteProyecto(proyecto: Proyecto, usuario: string){
+    this.proyectoService.deleteProyecto(proyecto.proyectoId, usuario).subscribe({
       next: () => {
-        this.getProyectoList(this.nombreUsuario);
+        this.getProyectoList(usuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
@@ -48,58 +58,68 @@ export class ProyectoComponent implements OnInit {
   openAddModal() {
     let titulo = 'Agregar proyecto: ';
     let campos = Proyecto.getFieldsForm();
-    let imagenFile = File;
     
-
     this.modalsService.openAddModal(campos, titulo);
-    this.imagen.fileData$.subscribe( (result) => {
-      imagenFile = result;
-      console.log(imagenFile)
-    });
+    
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
-      
       if (result) {
-        result['proyectoId'] = 0;
-       // console.log('esto llego a proyecto para agregarse: ' + JSON.stringify(result));
-       // console.log('finalmente cuando hago un submit en proyecto queda la siguiente imagen');
-       // console.log(imagenFile);
-        this.imagen.subirImagen(imagenFile, this.nombreUsuario)
-        this.imagen.url$.pipe(take(1)).subscribe((respuesta) => {
-          console.log('esto es lo que le llego a proyecto: ' + respuesta);
-          result['urlImagen'] = respuesta;
-          delete result['imagen']
-          console.log("finalmente el proyecto a agregar queda: " + JSON.stringify(result))
+        let proyecto = result;
+        proyecto['proyectoId'] = 0;
 
-          this.proyectoService.addProyecto(result, this.nombreUsuario).subscribe({
-            next: () => {
-              this.getProyectoList(this.nombreUsuario);
-            },
-            error: (error: HttpErrorResponse) => {
-              alert(error.message);
-            },
+        if (proyecto.imagen !== '') {
+          let imagenFile = File;
+          imagenFile = proyecto.imageInput;
+         
+          this.imagen.subirImagen(imagenFile, this.nombreUsuario);
+
+          this.imagen.url$.pipe(take(1)).subscribe((respuesta) => {
+            console.log('esta es la url que le llego a proyecto: ' + respuesta);
+            proyecto['urlImagen'] = respuesta;
+            console.log(
+              'finalmente el proyecto a agregar queda: ' + JSON.stringify(result)
+            );
+            this.addProyecto(proyecto, this.nombreUsuario);
           });
 
-        });
-        //console.log(urlImagen)
-        
-
-       /* this.proyectoService.addProyecto(result, this.nombreUsuario).subscribe({
-          next: () => {
-            this.getProyectoList(this.nombreUsuario);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          },
-        });*/
+        } else{
+          this.addProyecto(proyecto, this.nombreUsuario);
+        }
       }
     });
   }
 
-  editar(item: Proyecto) {
-    this.proyectoService.updateProyecto(item.proyectoId, item, this.nombreUsuario).subscribe({
+  addProyecto(proyecto: Proyecto, usuario: string){
+    this.proyectoService.addProyecto(proyecto, usuario).subscribe({
+      next: () => {
+        this.getProyectoList(usuario);
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    });
+  }
+
+  editar(item: any) {
+    console.log("a proyecto llega el siguiente proyecto editado" + JSON.stringify(item))
+    if(item.imagen !== ''){
+      this.imagen.url$.pipe(take(1)).subscribe((url) => {
+        item.urlImagen =  url;
+       console.log(
+         'el item editado queda: ' + JSON.stringify(item)
+       );
+        this.editarProyecto(item.proyectoId, item, this.nombreUsuario)
+     });
+    } else{
+      this.editarProyecto(item.proyectoId, item, this.nombreUsuario)
+    }
+    
+  }
+
+  editarProyecto(id: number, proyecto: Proyecto, usuario: string){
+    this.proyectoService.updateProyecto(id, proyecto, usuario).subscribe({
       next: (response: Proyecto) => {
         console.log(response);
-        this.getProyectoList(this.nombreUsuario);
+        this.getProyectoList(usuario);
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);

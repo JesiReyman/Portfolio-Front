@@ -33,17 +33,17 @@ export class ButtonsComponent implements OnInit {
 
     this.subscription = this.tokenService.logged$.subscribe({
       next: (estaLogueado) => {
-        console.log('llego al boton : ' + estaLogueado);
+       // console.log('llego al boton : ' + estaLogueado);
         this.isLogged = estaLogueado;
         if (estaLogueado) {
           this.isAdmin = this.tokenService.isAdmin();
-          console.log("es admin?: " + this.isAdmin);
+        //  console.log("es admin?: " + this.isAdmin);
           const currentUserName = this.tokenService.getUserName();
-          console.log("el usuario loggeado es: " + currentUserName);
+         // console.log("el usuario loggeado es: " + currentUserName);
           const currentRouteName = this.route.snapshot.params['nombreUsuario'];
-          console.log("la ruta actual es de: " + currentRouteName);
+         // console.log("la ruta actual es de: " + currentRouteName);
           this.esUsuarioValido = this.checkUsuario(currentUserName, currentRouteName);
-          console.log("son el mismo usuario?: " + this.esUsuarioValido);
+         // console.log("son el mismo usuario?: " + this.esUsuarioValido);
         } 
       },
       error: (error) => {

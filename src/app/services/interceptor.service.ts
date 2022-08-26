@@ -20,10 +20,10 @@ export class InterceptorService implements HttpInterceptor {
         },
       });
     }
-    console.log(
+    /*console.log(
       'Interceptor esta corriendo y mande al header el siguiente token: ' +
         JSON.stringify(token)
-    );
+    );*/
     return next.handle(req);
   }
 }

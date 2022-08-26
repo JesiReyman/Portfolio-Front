@@ -86,12 +86,21 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
 
   subirArchivo(evento: any){
     
-    this.imagenSeleccionada = evento.target.files[0];
+    if(evento.target.files.length > 0){
+      this.imagenSeleccionada = evento.target.files[0];
+      this.formulario.patchValue({'imageInput': this.imagenSeleccionada})
+      console.log(this.imagenSeleccionada)
+      //console.log(this.formulario.get('imageInput')?.setValue(this.imagenSeleccionada))
+    }
+   // this.imagen.mandarFile(this.imagenSeleccionada);
+  }
 
-   // console.log(this.imagenSeleccionada)
-    /*uploadBytes(imgRef, file).then(
-      resultado => console.log(resultado)
-    ).catch(error => console.log(error));*/
-    this.imagen.mandarFile(this.imagenSeleccionada);
+
+  submit() {
+   // console.log(this.formulario.value);
+   // console.log("esto es imagen: " + this.formulario.controls['imagen'].value)
+   // console.log("esto es imageInput: " )
+   // console.log( this.formulario.controls['imageInput'].value)
+    this.activeModal.close(this.formulario.value)
   }
 }

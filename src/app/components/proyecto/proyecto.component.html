@@ -10,6 +10,7 @@
 
         <div class="d-flex flex-wrap justify-content-evenly">
             <app-proyecto-item *ngFor="let proyecto of listaProyecto" [proyectoItem]="proyecto"
+                [nombreUsuario]="nombreUsuario"
                 (aceptoBorrar)="borrar($event)" (editarProyecto)="editar($event)">
             </app-proyecto-item>
         </div>

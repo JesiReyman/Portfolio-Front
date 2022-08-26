@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     this.subscription = this.tokenService.logged$.subscribe({
       next: (data: boolean) => {
         this.isLogged = data;
-        console.log('el boton login escucho, y isLogged es: ' + this.isLogged);
+       // console.log('el boton login escucho, y isLogged es: ' + this.isLogged);
       },
     });
   }

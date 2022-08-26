@@ -30,6 +30,9 @@ export class ModalsService {
   nombreDeUsuario = new Subject<string>();
   nombre$ = this.nombreDeUsuario.asObservable();
 
+  private acepto = new Subject<boolean>();
+  acepto$ = this.acepto.asObservable();
+
   openDeleteModal(titulo: string, nombreItem: string): void {
     const modalRef = this.modalService.open(ModalDeleteComponent);
     modalRef.componentInstance.nombreItem = nombreItem;
@@ -55,6 +58,13 @@ export class ModalsService {
         console.log(
           'voy a mandar lo siguiente para agregar: ' + JSON.stringify(result)
         );
+        console.log(result)
+       /* if(result.imagen !== ""){
+          console.log(
+            'aca entro si efectivamente hay una imagen');*/
+           // this.acepto.next(true);
+      //  }
+        
       })
       .catch((error) => {
         console.log(error);
