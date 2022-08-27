@@ -6,34 +6,42 @@ import { ModalsService } from 'src/app/services/modals.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
-  nombreUsuario: string = "";
+  nombreUsuario: string = '';
   subscription?: Subscription;
 
-  constructor(private route: ActivatedRoute, private router: Router, private modalService: ModalsService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: ModalsService
+  ) {
     this.subscription = this.modalService.nombre$.subscribe({
       next: (nombre) => {
-        if(nombre){
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([nombre]);
+        if (nombre) {
+          if (nombre == this.nombreUsuario) {
+            // console.log("estoy en el caso de que el usuario logueado coincidia con el de ruta")
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([nombre]);
+              });
+          } else {
+            // console.log("los usuario no coinciden")
+            this.router.navigate([nombre]).then(() => {
+              window.location.reload();
             });
+          }
         }
-        
-        //this.router.navigate([nombre]);
-        //window.location.reload();
-        //this.nombreUsuario = this.route.snapshot.params['nombreUsuario'];
       },
       error: (error) => {
-        console.log(error);
+        alert(error);
       },
-    })
-   }
+    });
+  }
 
   ngOnInit(): void {
     this.nombreUsuario = this.route.snapshot.params['nombreUsuario'];
   }
-
 }

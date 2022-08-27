@@ -8,7 +8,7 @@
 
     </div>
     <!-- TODO: mejorar aspecto transicion -->
-    <div class="d-flex flex-wrap justify-content-evenly" cdkDropListGroup>
+    <div class="d-flex flex-wrap container justify-content-evenly" cdkDropListGroup>
         <app-skill-item *ngFor="let skill of listaSkill;let i=index" [skillItem]="skill" (aceptoBorrar)="borrar($event)"
             (editarSkill)="editar($event)" cdkDropList cdkDropListOrientation="horizontal"
             [cdkDropListData]="{item:skill,index:i}" (cdkDropListDropped)="drop($event)">

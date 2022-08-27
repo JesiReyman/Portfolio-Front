@@ -17,19 +17,13 @@ export class ButtonsComponent implements OnInit {
   isAdmin: boolean = false;
   isLogged: boolean = false;
   subscription?: Subscription;
-  //currentUserName: string = '';
-  //currentRouteName: string = '';
   esUsuarioValido: boolean = false;
 
   constructor(
-    private modalService: ModalsService,
     private tokenService: TokenService,
     private route: ActivatedRoute
   ) {
-   /* const merged = merge(
-      this.tokenService.logged$,
-      this.modalService.loginData$
-    );*/
+   
 
     this.subscription = this.tokenService.logged$.subscribe({
       next: (estaLogueado) => {
@@ -43,7 +37,7 @@ export class ButtonsComponent implements OnInit {
           const currentRouteName = this.route.snapshot.params['nombreUsuario'];
          // console.log("la ruta actual es de: " + currentRouteName);
           this.esUsuarioValido = this.checkUsuario(currentUserName, currentRouteName);
-         // console.log("son el mismo usuario?: " + this.esUsuarioValido);
+          //console.log("son el mismo usuario?: " + this.esUsuarioValido);
         } 
       },
       error: (error) => {
@@ -54,7 +48,7 @@ export class ButtonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicioBoton(this.title);
-    //this.checkIsLogged();
+    
   }
 
   inicioBoton(title: string) {
@@ -76,17 +70,5 @@ export class ButtonsComponent implements OnInit {
     }
     return this.esUsuarioValido;
   }
-  /*
-  checkIsAdmin() {
-    this.isAdmin = this.tokenService.isAdmin();
-  }
-
-  checkIsLogged() {
-    this.tokenService.logged$.subscribe({
-      next: (logueado) => {
-        this.isLogged = logueado;
-      },
-    });
-    console.log('se ejecuta checkIsLogged y su valor es: ' + this.isLogged);
-  }*/
+  
 }
