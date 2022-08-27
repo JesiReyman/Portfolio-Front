@@ -4,7 +4,7 @@ import { Skill } from 'src/app/models/skill';
 import { ModalsService } from 'src/app/services/modals.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { take } from 'rxjs';
-import {CdkDragDrop, CdkDragEnter, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-skill',
@@ -36,7 +36,6 @@ export class SkillComponent implements OnInit {
   }
 
   borrar(id: number) {
-    console.log('a skill component llega para borrar: ' + id);
     this.skillService.deleteSkill(id, this.nombreUsuario).subscribe({
       next: () => {
         this.getSkillList(this.nombreUsuario);
@@ -55,8 +54,7 @@ export class SkillComponent implements OnInit {
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
       if (result) {
         result['skillId'] = 0;
-        console.log('esto llego para agregarse: ' + JSON.stringify(result));
-
+        
         this.skillService.addSkill(result, this.nombreUsuario).subscribe({
           next: () => {
             this.getSkillList(this.nombreUsuario);
@@ -72,7 +70,6 @@ export class SkillComponent implements OnInit {
   editar(item: Skill) {
     this.skillService.updateSkill(item.skillId, item, this.nombreUsuario).subscribe({
       next: (response: Skill) => {
-        console.log(response);
         this.getSkillList(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {

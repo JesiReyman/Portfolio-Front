@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { merge, Subscription } from 'rxjs';
-import { ModalsService } from 'src/app/services/modals.service';
+import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -41,7 +39,7 @@ export class ButtonsComponent implements OnInit {
         } 
       },
       error: (error) => {
-        console.log(error);
+        alert(error);
       },
     });
   }

@@ -13,7 +13,7 @@ import { take } from 'rxjs';
 })
 export class ExperienciaComponent implements OnInit {
   public listaExperiencia: Experiencia[] = [];
-  @Input() nombreUsuario: string = "";
+  @Input() nombreUsuario: string = '';
 
   constructor(
     private experienciaService: ExperienciaService,
@@ -36,14 +36,16 @@ export class ExperienciaComponent implements OnInit {
   }
 
   borrar(experienciaId: number) {
-    this.experienciaService.deleteExperiencia(experienciaId, this.nombreUsuario).subscribe({
-      next: () => {
-        this.getListaExperiencia(this.nombreUsuario);
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      },
-    });
+    this.experienciaService
+      .deleteExperiencia(experienciaId, this.nombreUsuario)
+      .subscribe({
+        next: () => {
+          this.getListaExperiencia(this.nombreUsuario);
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        },
+      });
   }
 
   openAddModal() {
@@ -55,14 +57,16 @@ export class ExperienciaComponent implements OnInit {
       if (result) {
         result['experienciaId'] = 0;
 
-        this.experienciaService.addExperiencia(result, this.nombreUsuario).subscribe({
-          next: () => {
-            this.getListaExperiencia(this.nombreUsuario);
-          },
-          error: (error: HttpErrorResponse) => {
-            alert(error.message);
-          },
-        });
+        this.experienciaService
+          .addExperiencia(result, this.nombreUsuario)
+          .subscribe({
+            next: () => {
+              this.getListaExperiencia(this.nombreUsuario);
+            },
+            error: (error: HttpErrorResponse) => {
+              alert(error.message);
+            },
+          });
       }
     });
   }
@@ -72,7 +76,6 @@ export class ExperienciaComponent implements OnInit {
       .updateExperiencia(item.experienciaId, item, this.nombreUsuario)
       .subscribe({
         next: (response: Experiencia) => {
-          console.log(response);
           this.getListaExperiencia(this.nombreUsuario);
         },
         error: (error: HttpErrorResponse) => {

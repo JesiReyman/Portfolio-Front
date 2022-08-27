@@ -7,7 +7,6 @@ const TOKEN_KEY = "AuthToken";
   providedIn: 'root',
 })
 export class TokenService {
-  
   private logged = new BehaviorSubject<boolean>(false);
   public logged$: Observable<boolean> = this.logged;
 
@@ -22,37 +21,35 @@ export class TokenService {
     return sessionStorage.getItem(TOKEN_KEY)!;
   }
 
-  
-  public getUserName(): string{
+  public getUserName(): string {
     const token = this.getToken();
-    const payload = token.split(".")[1];
+    const payload = token.split('.')[1];
     const payloadDecoded = atob(payload);
     const values = JSON.parse(payloadDecoded);
     const username = values.sub;
     return username;
   }
 
-  public isLogged(): void{
+  public isLogged(): void {
     let isLogged;
-    if(this.getToken()){
+    if (this.getToken()) {
       isLogged = true;
-    } else{
+    } else {
       isLogged = false;
     }
     this.logged.next(isLogged);
-   // console.log("dentro de isLogged, se emite: " + isLogged)
   }
 
   public isAdmin(): boolean {
-    let isAdmin
-    if(this.getToken()){
+    let isAdmin;
+    if (this.getToken()) {
       const token = this.getToken();
-    const payload = token.split('.')[1];
-    const payloadDecoded = atob(payload);
-    const values = JSON.parse(payloadDecoded);
-    const roles = values.roles;
-    isAdmin = roles.includes('ROLE_ADMIN');
-    }else{
+      const payload = token.split('.')[1];
+      const payloadDecoded = atob(payload);
+      const values = JSON.parse(payloadDecoded);
+      const roles = values.roles;
+      isAdmin = roles.includes('ROLE_ADMIN');
+    } else {
       isAdmin = false;
     }
     return isAdmin;
@@ -60,6 +57,5 @@ export class TokenService {
 
   public logOut(): void {
     window.sessionStorage.clear();
-    
   }
 }

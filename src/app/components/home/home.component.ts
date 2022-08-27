@@ -21,14 +21,12 @@ export class HomeComponent implements OnInit {
       next: (nombre) => {
         if (nombre) {
           if (nombre == this.nombreUsuario) {
-            // console.log("estoy en el caso de que el usuario logueado coincidia con el de ruta")
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
               .then(() => {
                 this.router.navigate([nombre]);
               });
           } else {
-            // console.log("los usuario no coinciden")
             this.router.navigate([nombre]).then(() => {
               window.location.reload();
             });

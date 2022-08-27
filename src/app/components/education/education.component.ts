@@ -18,8 +18,7 @@ export class EducationComponent implements OnInit {
 
   constructor(
     private educacionService: EducationService,
-    private modalsService: ModalsService,
-    private route: ActivatedRoute
+    private modalsService: ModalsService
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +74,6 @@ export class EducationComponent implements OnInit {
   editar(item: Educacion) {
     this.educacionService.updateEducacion(item.id_Edu, item, this.nombreUsuario).subscribe({
       next: (response: Educacion) => {
-        console.log(response);
         this.getListaEducacion(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {

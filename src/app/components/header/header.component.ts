@@ -43,17 +43,14 @@ export class HeaderComponent implements OnInit {
     let urlPerfilOriginal = item.urlFoto;
     let urlBannerOriginal = item.urlBanner;
 
-    console.log('este es el perfil a editar: ' + JSON.stringify(item));
     this.servicioModal.openAddModal(fields, titulo);
     this.servicioModal.resultado$.pipe(take(1)).subscribe((result: any) => {
       if (result) {
         let perfil = result;
         perfil['id'] = item.id;
-        console.log('voy a mandar a updatear: ' + JSON.stringify(perfil));
-
-        if (perfil.imagenPerfil !== '' || perfil.imagenBanner !== '') {
-          console.log('alguna imagen viene');
-          if (perfil.imagenPerfil !== '' && perfil.imagenBanner == '') {
+        
+        if (perfil.imagenPerfil || perfil.imagenBanner) {
+          if (perfil.imagenPerfil  && !perfil.imagenBanner ) {
             perfil.urlBanner = urlBannerOriginal;
 
             this.updateImagen(
@@ -62,7 +59,7 @@ export class HeaderComponent implements OnInit {
               perfil,
               'urlFoto'
             );
-          } else if (perfil.imagenPerfil == '' && perfil.imagenBanner !== '') {
+          } else if (!perfil.imagenPerfil && perfil.imagenBanner) {
             perfil.urlFoto = urlPerfilOriginal;
 
             this.updateImagen(
@@ -74,9 +71,8 @@ export class HeaderComponent implements OnInit {
           } else {
             let imagenDePerfil = perfil.imagenPerfilInput;
             this.imagenService.subirImagen(imagenDePerfil, this.nombreUsuario);
-            console.log('la urlFoto es: ' + urlPerfilOriginal);
-            if (urlPerfilOriginal !== ('' || null)) {
-              console.log('aca esta tratando de eliminar la url de la foto');
+            
+            if (urlPerfilOriginal) {
               this.imagenService.deleteImage(urlPerfilOriginal);
             }
 
@@ -106,10 +102,6 @@ export class HeaderComponent implements OnInit {
 
     this.headerService.updateUser(perfil.id, perfil, usuario).subscribe({
       next: (response: Perfil) => {
-        console.log(
-          'esto es despues que se llama al servicio header: ' +
-            JSON.stringify(response)
-        );
         this.getUser(usuario);
       },
       error: (error: HttpErrorResponse) => {
@@ -126,16 +118,13 @@ export class HeaderComponent implements OnInit {
   ) {
     let imagenParaActualizar = imagenActualizar;
     this.imagenService.subirImagen(imagenParaActualizar, this.nombreUsuario);
-    console.log('la urloriginal de la imagen es: ' + urlOriginalDeImagen);
-    if (urlOriginalDeImagen !== ('' || null)) {
-      console.log('aca esta tratando de eliminar la url de la imagen');
+    
+    if (urlOriginalDeImagen) {
       this.imagenService.deleteImage(urlOriginalDeImagen);
     }
 
     this.imagenService.url$.pipe(take(1)).subscribe((respuesta) => {
       perfil[campoDeLaUrl] = respuesta;
-      console.log('el perfil editado queda: ' + JSON.stringify(perfil));
-
       this.updatePerfil(perfil);
     });
   }

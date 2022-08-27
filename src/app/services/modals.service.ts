@@ -5,11 +5,7 @@ import { ModalDeleteComponent } from '../components/modals/modal-delete/modal-de
 import { AddModalComponent } from '../components/modals/add-modal/add-modal.component';
 import { FieldsForm } from '../models/fieldsForm';
 import { LoginModalComponent } from '../components/modals/login-modal/login-modal.component';
-import { AuthService } from './auth.service';
-import { LoginUsuario } from '../models/login-usuario';
 import { TokenService } from './token.service';
-import { JwtDto } from '../models/jwt-dto';
-import { Router } from '@angular/router';
 import { RegistroComponent } from '../components/modals/registro/registro.component';
 
 @Injectable({
@@ -30,9 +26,6 @@ export class ModalsService {
   nombreDeUsuario = new Subject<string>();
   nombre$ = this.nombreDeUsuario.asObservable();
 
-  private acepto = new Subject<boolean>();
-  acepto$ = this.acepto.asObservable();
-
   openDeleteModal(titulo: string, nombreItem: string): void {
     const modalRef = this.modalService.open(ModalDeleteComponent);
     modalRef.componentInstance.nombreItem = nombreItem;
@@ -40,10 +33,9 @@ export class ModalsService {
     modalRef.result
       .then((result) => {
         this._delete.next(result);
-        console.log('voy a mandar lo siguiente a item: ' + result);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }
 
@@ -55,39 +47,22 @@ export class ModalsService {
     modalRef.result
       .then((result) => {
         this.resultadoFormulario.next(result);
-        console.log(
-          'voy a mandar lo siguiente para agregar: ' + JSON.stringify(result)
-        );
-        console.log(result)
-       /* if(result.imagen !== ""){
-          console.log(
-            'aca entro si efectivamente hay una imagen');*/
-           // this.acepto.next(true);
-      //  }
-        
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }
 
   openLoginModal(): void {
-    console.log('esto abre el login modal');
     const modalRef = this.modalService.open(LoginModalComponent);
 
     modalRef.result.then((result) => {
-      console.log(
-        'al servicio llego el siguiente nombre de usuario: ' + result
-      );
       this.nombreDeUsuario.next(result);
-
-      console.log('llamo al metodo isLogged');
       this.tokenService.isLogged();
     });
   }
 
-  openRegistro(){
-     this.modalService.open(RegistroComponent, { windowClass: 'dark-modal' });
-    
+  openRegistro() {
+    this.modalService.open(RegistroComponent, { windowClass: 'dark-modal' });
   }
 }
