@@ -53,7 +53,7 @@ export class ProyectoItemComponent implements OnInit {
             if (result) {
               result['proyectoId'] = item.proyectoId;
               if (result.imagen !== '') {
-                let imagenFile = result.imageInput;
+                let imagenFile = result.imagenInput;
                 this.imagen.subirImagen(imagenFile, this.nombreUsuario);
 
                 if(urlOriginal !== '' && urlOriginal !== null){

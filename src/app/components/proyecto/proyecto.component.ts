@@ -34,7 +34,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   borrar(item: Proyecto) {
-    console.log('a proyecto component llega para borrar: ' + JSON.stringify(item) );
+    //console.log('a proyecto component llega para borrar: ' + JSON.stringify(item) );
     if(item.urlImagen !== '' && item.urlImagen !== null){
       this.imagen.deleteImage(item.urlImagen);
       this.deleteProyecto(item, this.nombreUsuario);
@@ -68,7 +68,7 @@ export class ProyectoComponent implements OnInit {
 
         if (proyecto.imagen !== '') {
           let imagenFile = File;
-          imagenFile = proyecto.imageInput;
+          imagenFile = proyecto.imagenInput;
          
           this.imagen.subirImagen(imagenFile, this.nombreUsuario);
 

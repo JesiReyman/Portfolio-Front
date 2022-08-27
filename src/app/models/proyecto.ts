@@ -54,7 +54,7 @@ export class Proyecto {
           required: false
         },
         {
-          nombre: 'imageInput',
+          nombre: 'imagenInput',
           type: 'hidden',
           label: '',
           value: '',
@@ -92,7 +92,7 @@ export class Proyecto {
           required: false
         },
         {
-          nombre: 'imageInput',
+          nombre: 'imagenInput',
           type: 'hidden',
           label: '',
           value: '',
