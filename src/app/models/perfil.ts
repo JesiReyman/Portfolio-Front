@@ -57,20 +57,6 @@ export class Perfil {
           required: true
         },
         {
-          nombre: 'urlBanner',
-          type: 'text',
-          label: 'URL de imagen de portada',
-          value: item.urlBanner,
-          required: false
-        },
-        {
-          nombre: 'urlFoto',
-          type: 'text',
-          label: 'URL de imagen de perfil',
-          value: item.urlFoto,
-          required: false
-        },
-        {
           nombre: 'urlGitHub',
           type: 'text',
           label: 'Enlace a GitHub',
@@ -84,6 +70,34 @@ export class Perfil {
           value: item.urlLinkedIn,
           required: false
         },
+        {
+          nombre: 'imagenPerfil',
+          type: 'file',
+          label: 'Imagen de perfil',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenPerfilInput',
+          type: 'hidden',
+          label: '',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenBanner',
+          type: 'file',
+          label: 'Imagen de portada',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenBannerInput',
+          type: 'hidden',
+          label: '',
+          value: '',
+          required: false
+        }
       ];
     } else {
       formFields = [
@@ -109,20 +123,6 @@ export class Perfil {
           required: true
         },
         {
-          nombre: 'urlBanner',
-          type: 'text',
-          label: 'URL de imagen de portada',
-          value: '',
-          required: false
-        },
-        {
-          nombre: 'urlFoto',
-          type: 'text',
-          label: 'URL de imagen de perfil',
-          value: '',
-          required: false
-        },
-        {
           nombre: 'urlGitHub',
           type: 'text',
           label: 'Enlace a GitHub',
@@ -136,6 +136,34 @@ export class Perfil {
           value: '',
           required: false
         },
+        {
+          nombre: 'imagenPerfil',
+          type: 'file',
+          label: 'Imagen de perfil',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenPerfilInput',
+          type: 'hidden',
+          label: '',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenBanner',
+          type: 'file',
+          label: 'Imagen de portada',
+          value: '',
+          required: false
+        },
+        {
+          nombre: 'imagenBannerInput',
+          type: 'hidden',
+          label: '',
+          value: '',
+          required: false
+        }
       ];
     }
     return formFields;

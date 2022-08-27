@@ -26,7 +26,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
     
   ngOnInit(): void {
 
-    console.log("Llego al modal los campos para el formulario: " + JSON.stringify(this.formFields))
+    //console.log("Llego al modal los campos para el formulario: " + JSON.stringify(this.formFields))
     this.estado = ["Finalizado", "En Curso", "Incompleto"];
 
     this.formFields.forEach((question: { nombre: string; value: string | number | null | Date | boolean; required: boolean}) => {
@@ -37,7 +37,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
 
     this.formulario = new FormGroup(this.group);
 
-    //console.log(this.formulario);
+    console.log(Object.keys(this.formulario.controls));
 
     
     this.formulario.get('actualidad')?.valueChanges
@@ -84,11 +84,13 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
     
   }*/
 
-  subirArchivo(evento: any){
+  subirArchivo(evento: any, nombreDelCampo: string){
     
+    let campoInput = nombreDelCampo+"Input"
+    //console.log(campoInput);
     if(evento.target.files.length > 0){
       this.imagenSeleccionada = evento.target.files[0];
-      this.formulario.patchValue({'imageInput': this.imagenSeleccionada})
+      this.formulario.patchValue({[campoInput]: this.imagenSeleccionada})
       console.log(this.imagenSeleccionada)
       //console.log(this.formulario.get('imageInput')?.setValue(this.imagenSeleccionada))
     }
