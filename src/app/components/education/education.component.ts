@@ -49,6 +49,7 @@ export class EducationComponent implements OnInit {
 
         this.educacionService.addEducacion(result, this.nombreUsuario).subscribe({
           next: () => {
+            alert("Se agregó correctamente");
             this.getListaEducacion(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
@@ -62,6 +63,7 @@ export class EducationComponent implements OnInit {
   borrar(educacionId: number) {
     this.educacionService.deleteEducacion(educacionId, this.nombreUsuario).subscribe({
       next: () => {
+        alert("Se eliminó correctamente");
         this.getListaEducacion(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
@@ -74,6 +76,7 @@ export class EducationComponent implements OnInit {
   editar(item: Educacion) {
     this.educacionService.updateEducacion(item.id_Edu, item, this.nombreUsuario).subscribe({
       next: (response: Educacion) => {
+        alert("Se guardó correctamente");
         this.getListaEducacion(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {

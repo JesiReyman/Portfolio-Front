@@ -5,6 +5,7 @@ import { HeaderService } from 'src/app/services/header.service';
 import { ModalsService } from 'src/app/services/modals.service';
 import { take } from 'rxjs';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private headerService: HeaderService,
     private servicioModal: ModalsService,
-    private imagenService: ImagenService
+    private imagenService: ImagenService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class HeaderComponent implements OnInit {
         this.usuario = response;
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        //alert(error.message);
+        this.router.navigate(['noencontrado/404']);
       },
     });
   }
@@ -102,6 +105,7 @@ export class HeaderComponent implements OnInit {
 
     this.headerService.updateUser(perfil.id, perfil, usuario).subscribe({
       next: (response: Perfil) => {
+        alert("Se guardó correctamente");
         this.getUser(usuario);
       },
       error: (error: HttpErrorResponse) => {
@@ -125,6 +129,7 @@ export class HeaderComponent implements OnInit {
 
     this.imagenService.url$.pipe(take(1)).subscribe((respuesta) => {
       perfil[campoDeLaUrl] = respuesta;
+      
       this.updatePerfil(perfil);
     });
   }

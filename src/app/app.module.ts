@@ -31,6 +31,7 @@ import { ProyectoItemComponent } from './components/proyecto-item/proyecto-item.
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { Pagina404Component } from './components/pagina404/pagina404.component';
 
 
 
@@ -54,7 +55,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     RegistroComponent,
     FooterComponent,
     ProyectoComponent,
-    ProyectoItemComponent
+    ProyectoItemComponent,
+    Pagina404Component
   ],
   imports: [
     BrowserModule,

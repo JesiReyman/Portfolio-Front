@@ -40,6 +40,7 @@ export class ExperienciaComponent implements OnInit {
       .deleteExperiencia(experienciaId, this.nombreUsuario)
       .subscribe({
         next: () => {
+          alert("Se eliminó correctamente");
           this.getListaExperiencia(this.nombreUsuario);
         },
         error: (error: HttpErrorResponse) => {
@@ -61,6 +62,7 @@ export class ExperienciaComponent implements OnInit {
           .addExperiencia(result, this.nombreUsuario)
           .subscribe({
             next: () => {
+              alert("Se agregó correctamente");
               this.getListaExperiencia(this.nombreUsuario);
             },
             error: (error: HttpErrorResponse) => {
@@ -76,6 +78,7 @@ export class ExperienciaComponent implements OnInit {
       .updateExperiencia(item.experienciaId, item, this.nombreUsuario)
       .subscribe({
         next: (response: Experiencia) => {
+          alert("Se guardó correctamente");
           this.getListaExperiencia(this.nombreUsuario);
         },
         error: (error: HttpErrorResponse) => {

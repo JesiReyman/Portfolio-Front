@@ -38,6 +38,7 @@ export class SkillComponent implements OnInit {
   borrar(id: number) {
     this.skillService.deleteSkill(id, this.nombreUsuario).subscribe({
       next: () => {
+        alert("Se eliminó correctamente");
         this.getSkillList(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {
@@ -57,6 +58,7 @@ export class SkillComponent implements OnInit {
         
         this.skillService.addSkill(result, this.nombreUsuario).subscribe({
           next: () => {
+            alert("Se agregó correctamente");
             this.getSkillList(this.nombreUsuario);
           },
           error: (error: HttpErrorResponse) => {
@@ -70,6 +72,7 @@ export class SkillComponent implements OnInit {
   editar(item: Skill) {
     this.skillService.updateSkill(item.skillId, item, this.nombreUsuario).subscribe({
       next: (response: Skill) => {
+        alert("Se guardó correctamente");
         this.getSkillList(this.nombreUsuario);
       },
       error: (error: HttpErrorResponse) => {

@@ -37,6 +37,7 @@ export class RegistroComponent implements OnInit {
     this.authService.nuevo(datos).subscribe({
       next: (result) => {
         this.activeModal.close();
+        alert("Ha sido registrado exitosamente, ya puede iniciar sesión")
       },
       error: (error: HttpErrorResponse) => {
         alert(error);

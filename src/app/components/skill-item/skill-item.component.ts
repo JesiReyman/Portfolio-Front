@@ -36,12 +36,12 @@ export class SkillItemComponent implements OnInit {
           const currentUserName = this.tokenService.getUserName();
           const currentRouteName = this.route.snapshot.params['nombreUsuario'];
           this.esUsuarioValido = this.checkUsuario(currentUserName, currentRouteName);
-
-          if(this.isAdmin || this.esUsuarioValido){
-            this.dragDesahabilitado = false;
-          }
-         
         } 
+        if(this.isLogged && (this.isAdmin || this.esUsuarioValido)){
+          this.dragDesahabilitado = false;
+        } else{
+          this.dragDesahabilitado = true;
+        }
       },
       error: (error) => {
         alert(error);

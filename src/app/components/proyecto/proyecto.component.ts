@@ -53,6 +53,7 @@ export class ProyectoComponent implements OnInit {
       .deleteProyecto(proyecto.proyectoId, usuario)
       .subscribe({
         next: () => {
+          alert("Se eliminó correctamente");
           this.getProyectoList(usuario);
         },
         error: (error: HttpErrorResponse) => {
@@ -93,6 +94,7 @@ export class ProyectoComponent implements OnInit {
     const usuario = this.nombreUsuario;
     this.proyectoService.addProyecto(proyecto, usuario).subscribe({
       next: () => {
+        alert("Se agregó correctamente");
         this.getProyectoList(usuario);
       },
       error: (error: HttpErrorResponse) => {
@@ -116,6 +118,7 @@ export class ProyectoComponent implements OnInit {
     const usuario = this.nombreUsuario;
     this.proyectoService.updateProyecto(proyecto.proyectoId, proyecto, usuario).subscribe({
       next: (response: Proyecto) => {
+        alert("Se guardó correctamente");
         this.getProyectoList(usuario);
       },
       error: (error: HttpErrorResponse) => {

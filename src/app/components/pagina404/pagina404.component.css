@@ -1,0 +1,10 @@
+.body{
+    height: 90vh;
+    text-align: center;
+    justify-content: center;
+}
+
+*{
+    background-color:black;
+    color: white;
+}
