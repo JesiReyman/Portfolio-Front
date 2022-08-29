@@ -14,7 +14,7 @@ export const environment = {
     messagingSenderId: '536918368244',
   },
   production: false,
-  apiBaseUrl: "http://localhost:8080"
+  apiUrl: "http://localhost:8080"
 };
 
 /*

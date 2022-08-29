@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Proyecto } from '../models/proyecto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectoService {
 
-  private proyectoServerUrl = "http://localhost:8080/proyecto";
+  //private proyectoServerUrl = "http://localhost:8080/proyecto";
   //private proyectoServerUrl = "https://apibackportfolio.herokuapp.com/proyecto";
+  private proyectoServerUrl = environment.apiUrl + '/proyecto';
 
   constructor(private http: HttpClient) { }
 

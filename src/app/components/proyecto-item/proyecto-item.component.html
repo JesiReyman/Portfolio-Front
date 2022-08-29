@@ -1,4 +1,4 @@
-<div class="card text-white bg-dark my-2" style="width: 20rem;">
+<div class="card text-white bg-dark my-2" style="width: 20rem; height: 25rem;">
     <div class="ms-auto">
 
         <app-buttons [title]="'Edit'" (click)="openEditModal(proyectoItem)">
@@ -9,10 +9,16 @@
 
     </div>
 
-    <img src="{{proyectoItem.urlImagen}}" onerror="this.src='https://drive.google.com/uc?export=view&id=1col89snMOOZkQ3bEbY4qxxnRlS3KNh3k'" class="card-img-top" alt="...">
-    <div class="card-body text-center">
-      <h5 class="card-title">{{proyectoItem.titulo}}</h5>
-      <p class="card-text"> {{proyectoItem.descripcion}} </p>
-      <a href="#" class="btn btn-primary ms-auto"><i class="fa-solid fa-up-right-from-square"></i></a>
+    <div class="d-flex flex-column" style="height: 90%"> 
+      <div class="d-flex mb-auto" style="max-height: 12rem;">
+        <img src="{{proyectoItem.urlImagen}}" onerror="this.src='https://drive.google.com/uc?export=view&id=1col89snMOOZkQ3bEbY4qxxnRlS3KNh3k'" class="card-img-top img-responsive" alt="...">
+      </div>
+      
+      <div class="card-body text-center d-flex flex-column mt-auto p-1">
+        <h5 class="card-title">{{proyectoItem.titulo}}</h5>
+        <p class="card-text"> {{proyectoItem.descripcion}} </p>
+        <a href="{{proyectoItem.urlProyecto}}" target="_blank" class="btn btn-primary mt-auto align-self-end"><i class="fa-solid fa-up-right-from-square"></i></a>
+      </div>
     </div>
+    
   </div>

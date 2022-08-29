@@ -40,7 +40,7 @@ export class Experiencia{
                   type: "number",
                   label: "Año de finalización de la actividad",
                   value: item.anioFin,
-                  required: false
+                  required: true
                 }
                 ,  {
                   nombre: "actualidad",
@@ -79,7 +79,7 @@ export class Experiencia{
                   type: "number",
                   label: "Año de finalización de la actividad",
                   value: "",
-                  required: false
+                  required: true
                 }
                 ,  {
                   nombre: "actualidad",

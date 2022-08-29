@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Skill } from 'src/app/models/skill';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { ModalsService } from 'src/app/services/modals.service';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
+import { TokenService } from 'src/app/services/token.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-skill-item',
@@ -13,11 +15,39 @@ export class SkillItemComponent implements OnInit {
   @Input() skillItem: Skill = <Skill>{};
   @Output() aceptoBorrar: EventEmitter<number> = new EventEmitter();
   @Output() editarSkill: EventEmitter<Skill> = new EventEmitter();
+  isAdmin: boolean = false;
+  isLogged: boolean = false;
+  subscription?: Subscription;
+  esUsuarioValido: boolean = false;
+  dragDesahabilitado: boolean = true;
 
   constructor(
     public modalService: NgbModal,
-    private servicioModal: ModalsService
-  ) {}
+    private servicioModal: ModalsService,
+    private tokenService: TokenService,
+    private route: ActivatedRoute
+  ) {
+    this.subscription = this.tokenService.logged$.subscribe({
+      next: (estaLogueado) => {
+       
+        this.isLogged = estaLogueado;
+        if (estaLogueado) {
+          this.isAdmin = this.tokenService.isAdmin();
+          const currentUserName = this.tokenService.getUserName();
+          const currentRouteName = this.route.snapshot.params['nombreUsuario'];
+          this.esUsuarioValido = this.checkUsuario(currentUserName, currentRouteName);
+
+          if(this.isAdmin || this.esUsuarioValido){
+            this.dragDesahabilitado = false;
+          }
+         
+        } 
+      },
+      error: (error) => {
+        alert(error);
+      },
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -43,6 +73,13 @@ export class SkillItemComponent implements OnInit {
         this.editarSkill.emit(result);
       }
     });
+  }
+
+  checkUsuario(usuarioLogueado: string, usuarioRuta: string): boolean{
+    if(usuarioLogueado==usuarioRuta){
+      this.esUsuarioValido = true;
+    }
+    return this.esUsuarioValido;
   }
 }
 

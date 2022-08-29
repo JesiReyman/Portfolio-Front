@@ -35,7 +35,7 @@ export class Proyecto {
         {
           nombre: 'descripcion',
           type: 'text',
-          label: 'Descripción del proyecto',
+          label: 'Breve descripción del proyecto',
           value: item.descripcion,
           required: true
         },
@@ -73,7 +73,7 @@ export class Proyecto {
         {
           nombre: 'descripcion',
           type: 'text',
-          label: 'Descripción del proyecto',
+          label: 'Breve descripción del proyecto',
           value: '',
           required: true
         },

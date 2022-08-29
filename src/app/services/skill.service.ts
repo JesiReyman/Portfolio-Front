@@ -9,8 +9,9 @@ import { Skill } from '../models/skill';
 })
 export class SkillService {
 
-  private skillServerUrl = "http://localhost:8080/skill";
+  //private skillServerUrl = "http://localhost:8080/skill";
   //private skillServerUrl = "https://apibackportfolio.herokuapp.com/skill";
+  private skillServerUrl = environment.apiUrl + '/skill';
 
   constructor(private http: HttpClient) { }
 

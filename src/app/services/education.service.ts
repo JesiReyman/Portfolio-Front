@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Educacion } from '../models/educacion';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EducationService {
 
-  private educacionServerUrl = "http://localhost:8080/educacion";
+  //private educacionServerUrl = "http://localhost:8080/educacion";
   //private educacionServerUrl = "https://apibackportfolio.herokuapp.com/educacion";
+  private educacionServerUrl = environment.apiUrl + '/educacion';
 
   constructor(private http: HttpClient) { }
 
