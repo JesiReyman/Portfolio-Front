@@ -35,7 +35,7 @@ export class ModalsService {
         this._delete.next(result);
       })
       .catch((error) => {
-        alert(error);
+       // alert(error);
       });
   }
 
@@ -49,7 +49,7 @@ export class ModalsService {
         this.resultadoFormulario.next(result);
       })
       .catch((error) => {
-        alert(error);
+       // alert(error);
       });
   }
 
@@ -59,7 +59,11 @@ export class ModalsService {
     modalRef.result.then((result) => {
       this.nombreDeUsuario.next(result);
       this.tokenService.isLogged();
+    })
+    .catch((error) => {
+
     });
+    
   }
 
   openRegistro() {

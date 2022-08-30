@@ -29,7 +29,7 @@ export class Educacion {
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
-                  label: "Fecha de inicio",
+                  label: "Año de inicio",
                   value: item.anioInicio,
                   required: true
                 }
@@ -60,7 +60,7 @@ export class Educacion {
                 ,  {
                   nombre: "anioInicio",
                   type: "number",
-                  label: "Fecha de inicio",
+                  label: "Año de inicio",
                   value: null,
                   required: true
                 }
