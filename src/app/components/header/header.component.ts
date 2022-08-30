@@ -51,9 +51,9 @@ export class HeaderComponent implements OnInit {
       if (result) {
         let perfil = result;
         perfil['id'] = item.id;
-        
+
         if (perfil.imagenPerfil || perfil.imagenBanner) {
-          if (perfil.imagenPerfil  && !perfil.imagenBanner ) {
+          if (perfil.imagenPerfil && !perfil.imagenBanner) {
             perfil.urlBanner = urlBannerOriginal;
 
             this.updateImagen(
@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
           } else {
             let imagenDePerfil = perfil.imagenPerfilInput;
             this.imagenService.subirImagen(imagenDePerfil, this.nombreUsuario);
-            
+
             if (urlPerfilOriginal) {
               this.imagenService.deleteImage(urlPerfilOriginal);
             }
@@ -90,12 +90,12 @@ export class HeaderComponent implements OnInit {
               );
             });
           }
+        } else {
+          perfil.urlBanner = urlBannerOriginal;
+          perfil.urlFoto = urlPerfilOriginal;
+
+          this.updatePerfil(perfil);
         }
-
-        perfil.urlBanner = urlBannerOriginal;
-        perfil.urlFoto = urlPerfilOriginal;
-
-        this.updatePerfil(perfil);
       }
     });
   }
