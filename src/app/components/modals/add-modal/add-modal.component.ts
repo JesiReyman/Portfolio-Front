@@ -12,7 +12,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
   @Input() formFields: FieldsForm[] = [];
   @Input() titulo: string = '';
   formulario: FormGroup = {} as FormGroup;
-  estado: string[] = [];
+  estado: string[] = ['Finalizado', 'En Curso', 'Incompleto'];
 
   group: any = {};
   imagenSeleccionada: any = null;
@@ -23,8 +23,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    this.estado = ['Finalizado', 'En Curso', 'Incompleto'];
-
+    
     this.formFields.forEach(
       (question: {
         nombre: string;

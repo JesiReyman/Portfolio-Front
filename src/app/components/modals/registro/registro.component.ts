@@ -20,7 +20,7 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.registroForm = new FormGroup({
       nombre: new FormControl(),
-      email: new FormControl('', [Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       nombreUsuario: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -31,6 +31,10 @@ export class RegistroComponent implements OnInit {
 
   get nombreUsuario() {
     return this.registroForm.get('nombreUsuario');
+  }
+
+  get email(){
+    return this.registroForm.get('email');
   }
 
   registro(datos: NuevoUsuario) {

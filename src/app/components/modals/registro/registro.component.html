@@ -18,10 +18,12 @@
             <input type="email" 
             class="form-control" formControlName="email" required>
 
-           <!-- <div *ngif="(registroFormForm.get('email').invalid && registroFormForm.get('email').touched) || registroFormForm.get('email').dirty">
-              <small class="text-danger" *ngif="registroFormForm.get('email').errors?.required">Email address is required</small>
-              <small class="text-danger" *ngif="registroFormForm.get('email').errors?.email">Email address is invalid</small>
-            </div>-->
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+              <div *ngIf="email?.errors?.['required']">
+                Por favor, ingrese una dirección de email.
+              </div>
+              <div  *ngIf="email?.errors?.['email']">Dirección de email inválido</div>
+            </div>
 
             <div class="form-group">
               <label class="col-form-label">Nombre de Usuario</label>

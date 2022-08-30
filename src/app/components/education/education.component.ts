@@ -4,7 +4,6 @@ import { Educacion } from 'src/app/models/educacion';
 import { EducationService } from 'src/app/services/education.service';
 import { ModalsService } from 'src/app/services/modals.service';
 import { take } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-education',
@@ -13,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EducationComponent implements OnInit {
   public listaEducacion: Educacion[] = [];
-  //userName: string = "";
   @Input() nombreUsuario: string = "";
 
   constructor(
@@ -22,8 +20,6 @@ export class EducationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    //this.userName = this.route.snapshot.params['nombreUsuario'];  
     this.getListaEducacion(this.nombreUsuario);
   }
 
@@ -46,7 +42,6 @@ export class EducationComponent implements OnInit {
     this.modalsService.resultado$.pipe(take(1)).subscribe((result: any) => {
       if (result) {
         result['id_Edu'] = 0;
-
         this.educacionService.addEducacion(result, this.nombreUsuario).subscribe({
           next: () => {
             alert("Se agregó correctamente");
