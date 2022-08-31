@@ -3,11 +3,11 @@ import { FieldsForm } from "./fieldsForm";
 export class Educacion {
     id_Edu: number;
     tituloEdu: string;
-    anioInicio: number = new Date().getFullYear();
+    anioInicio: Date;
     descripcionEdu: string;
     estado: string;
 
-    constructor(id_Edu: number, tituloEdu: string, anioInicio: number, descripcionEdu: string, estado: string){
+    constructor(id_Edu: number, tituloEdu: string, anioInicio: Date, descripcionEdu: string, estado: string){
         this.id_Edu = id_Edu;
         this.tituloEdu = tituloEdu;
         this.anioInicio = anioInicio;
@@ -28,7 +28,7 @@ export class Educacion {
                 }
                 ,  {
                   nombre: "anioInicio",
-                  type: "number",
+                  type: "Date",
                   label: "Año de inicio",
                   value: item.anioInicio,
                   required: true
@@ -59,7 +59,7 @@ export class Educacion {
                 }
                 ,  {
                   nombre: "anioInicio",
-                  type: "number",
+                  type: "Date",
                   label: "Año de inicio",
                   value: null,
                   required: true

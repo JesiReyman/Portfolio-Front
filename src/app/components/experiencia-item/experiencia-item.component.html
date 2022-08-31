@@ -24,9 +24,9 @@
         </div>
         
         <div class="fecha ms-auto">
-          <h5 class="card-title p-1" *ngIf="!experienciaItem.actualidad">{{experienciaItem.anioInicio}} - {{experienciaItem.anioFin}}</h5>
+          <h5 class="card-title p-1" *ngIf="!experienciaItem.actualidad">{{experienciaItem.anioInicio | date:'yyyy'}} - {{experienciaItem.anioFin | date:'yyyy'}}</h5>
            
-          <h5 class="card-title p-1" *ngIf="experienciaItem.actualidad">{{experienciaItem.anioInicio}} - En la actualidad</h5> 
+          <h5 class="card-title p-1" *ngIf="experienciaItem.actualidad">{{experienciaItem.anioInicio | date:'yyyy'}} - En la actualidad</h5> 
         </div>
       </div>
     </div>

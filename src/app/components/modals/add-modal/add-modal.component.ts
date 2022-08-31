@@ -13,6 +13,7 @@ export class AddModalComponent implements OnInit, AfterViewChecked {
   @Input() titulo: string = '';
   formulario: FormGroup = {} as FormGroup;
   estado: string[] = ['Finalizado', 'En Curso', 'Incompleto'];
+  nivel: number[] = Array.from({length: 100}, (_, i) => i + 1) ;
 
   group: any = {};
   imagenSeleccionada: any = null;

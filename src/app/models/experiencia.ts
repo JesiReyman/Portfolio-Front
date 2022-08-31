@@ -3,12 +3,12 @@ import { FieldsForm } from "./fieldsForm";
 export class Experiencia{
     experienciaId: number;
     tituloExperiencia: string;
-    anioInicio: number = new Date().getFullYear();
-    anioFin: number = new Date().getFullYear();
+    anioInicio: Date;
+    anioFin: Date;
     actualidad: boolean;
     descripcionExperiencia: string;
 
-    constructor(experienciaId: number, tituloExperiencia: string, anioInicio: number, anioFin: number, actualidad: boolean, descripcionExperiencia: string){
+    constructor(experienciaId: number, tituloExperiencia: string, anioInicio: Date, anioFin: Date, actualidad: boolean, descripcionExperiencia: string){
         this.experienciaId = experienciaId;
         this.tituloExperiencia = tituloExperiencia;
         this.anioInicio = anioInicio;
@@ -30,14 +30,14 @@ export class Experiencia{
                 }
                 ,  {
                   nombre: "anioInicio",
-                  type: "number",
+                  type: "Date",
                   label: "Año de inicio de la actividad",
                   value: item.anioInicio,
                   required: true
                 }
                 ,  {
                   nombre: "anioFin",
-                  type: "number",
+                  type: "Date",
                   label: "Año de finalización de la actividad",
                   value: item.anioFin,
                   required: true
@@ -69,14 +69,14 @@ export class Experiencia{
                 }
                 ,  {
                   nombre: "anioInicio",
-                  type: "number",
+                  type: "Date",
                   label: "Año de inicio de la actividad",
                   value: null,
                   required: true
                 }
                 ,  {
                   nombre: "anioFin",
-                  type: "number",
+                  type: "Date",
                   label: "Año de finalización de la actividad",
                   value: "",
                   required: true
