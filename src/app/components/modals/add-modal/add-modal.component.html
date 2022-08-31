@@ -52,7 +52,7 @@
             </select>
 
             <div class="form-group mb-3" *ngIf="prop.nombre.includes('imagen')">
-              <input class="form-control" formControlName={{prop.nombre}} type={{prop.type}} accept=".png, .jpg" (change)="subirArchivo($event, prop.nombre)" />
+              <input class="form-control" formControlName={{prop.nombre}} type={{prop.type}} accept=".png, .jpg, .jpeg" (change)="subirArchivo($event, prop.nombre)" />
             </div>
 
             <div
