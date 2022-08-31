@@ -9,6 +9,7 @@
 
 .img-perfil {
   border-radius:50%;
+  min-width: 30%;
   max-width: 300px;
   max-height: 20%;
   border: 1px solid black;
