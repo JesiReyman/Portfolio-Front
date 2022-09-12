@@ -1,4 +1,8 @@
 .fecha, .descripcion{
     text-align: center;
+    justify-content: center;
 }
 
+.descripcion{
+    width: 80%;
+}

@@ -18,12 +18,12 @@
            
       </div>
       
-      <div class="d-flex card-body bg-light align-items-center">
+      <div class="d-flex flex-wrap-reverse card-body bg-light align-items-center justify-content-center">
         <div class="descripcion"> 
           <h5 class="card-text">{{experienciaItem.descripcionExperiencia}} </h5>
         </div>
         
-        <div class="fecha ms-auto">
+        <div class="fecha ms-lg-auto">
           <h5 class="card-title p-1" *ngIf="!experienciaItem.actualidad">{{experienciaItem.anioInicio | date:'yyyy'}} - {{experienciaItem.anioFin | date:'yyyy'}}</h5>
            
           <h5 class="card-title p-1" *ngIf="experienciaItem.actualidad">{{experienciaItem.anioInicio | date:'yyyy'}} - En la actualidad</h5> 
