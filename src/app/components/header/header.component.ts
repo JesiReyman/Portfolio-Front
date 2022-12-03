@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   public usuario: Perfil = {} as Perfil;
 
   @Input() nombreUsuario: string = '';
+  ocultarLoader: boolean = false;
 
   constructor(
     private headerService: HeaderService,
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
     this.headerService.getUser(nombreUsuario).subscribe({
       next: (response: Perfil) => {
         this.usuario = response;
+        this.ocultarLoader = !this.ocultarLoader;
       },
       error: (error: HttpErrorResponse) => {
         //alert(error.message);

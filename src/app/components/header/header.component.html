@@ -16,9 +16,20 @@
           onerror="this.src='https://drive.google.com/uc?export=view&id=1QUBkdzBcg7e4EJZn14S7-LqiXfgv9jLv'"
           class="foto-perfil rounded-circle img-fluid" alt="img-perfil">
       </div>
-      <div class="d-flex container-presentacion" id="presentacion">
-        <div class="d-flex flex-column ">
+      <div class="d-flex  container-presentacion" id="presentacion">
+        <div class="d-flex align-items-center flex-column ">
           <h1>{{usuario.nombre}} {{usuario.apellido}}</h1>
+          <div class="loader-container d-flex flex-wrap " *ngIf="!ocultarLoader">
+            <div class="spinner-grow spinner-grow text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow spinner-grow text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="d-flex  spinner-grow text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <div class="d-flex  justify-content-center align-items-center descripcion">
             <h5> {{usuario.descripcion}} </h5>
             <app-buttons [title]="'Edit'" (click)="editar(usuario)">

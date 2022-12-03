@@ -35,6 +35,11 @@ h3{
   
 }
 
+.loader-container {
+  width: 50%;
+  justify-content: space-evenly;
+}
+
 @media only screen and (max-width: 800px) {
   .img-perfil{
     max-width: 200px;

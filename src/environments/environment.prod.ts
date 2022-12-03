@@ -8,6 +8,6 @@ export const environment = {
     authDomain: 'portfolio-9dcf2.firebaseapp.com',
     messagingSenderId: '536918368244',
   },
-  apiUrl: "https://apibackportfolio.herokuapp.com",
+  apiUrl: "https://prueba-jesicamr.koyeb.app",
   production: true
 };
